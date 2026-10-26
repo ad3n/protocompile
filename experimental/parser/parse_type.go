@@ -15,13 +15,13 @@
 package parser
 
 import (
-	"github.com/bufbuild/protocompile/experimental/ast"
-	"github.com/bufbuild/protocompile/experimental/internal/astx"
-	"github.com/bufbuild/protocompile/experimental/internal/taxa"
-	"github.com/bufbuild/protocompile/experimental/token"
-	"github.com/bufbuild/protocompile/experimental/token/keyword"
-	"github.com/bufbuild/protocompile/internal/ext/iterx"
-	"github.com/bufbuild/protocompile/internal/ext/slicesx"
+	"github.com/ad3n/protocompile/experimental/ast"
+	"github.com/ad3n/protocompile/experimental/internal/astx"
+	"github.com/ad3n/protocompile/experimental/internal/taxa"
+	"github.com/ad3n/protocompile/experimental/token"
+	"github.com/ad3n/protocompile/experimental/token/keyword"
+	"github.com/ad3n/protocompile/internal/ext/iterx"
+	"github.com/ad3n/protocompile/internal/ext/slicesx"
 )
 
 // parseType attempts to parse a type, optionally followed by a non-absolute

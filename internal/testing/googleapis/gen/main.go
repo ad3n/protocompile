@@ -31,8 +31,8 @@ import (
 	"runtime/debug"
 	"time"
 
-	"github.com/bufbuild/protocompile/internal/ext/bitsx"
-	"github.com/bufbuild/protocompile/internal/ext/flagx"
+	"github.com/ad3n/protocompile/internal/ext/bitsx"
+	"github.com/ad3n/protocompile/internal/ext/flagx"
 )
 
 func main() {

@@ -20,14 +20,14 @@ import (
 	"unicode"
 	"unicode/utf8"
 
-	"github.com/bufbuild/protocompile/experimental/id"
-	"github.com/bufbuild/protocompile/experimental/internal/errtoken"
-	"github.com/bufbuild/protocompile/experimental/internal/tokenmeta"
-	"github.com/bufbuild/protocompile/experimental/report"
-	"github.com/bufbuild/protocompile/experimental/token"
-	"github.com/bufbuild/protocompile/experimental/token/keyword"
-	"github.com/bufbuild/protocompile/internal/ext/stringsx"
-	"github.com/bufbuild/protocompile/internal/ext/unicodex"
+	"github.com/ad3n/protocompile/experimental/id"
+	"github.com/ad3n/protocompile/experimental/internal/errtoken"
+	"github.com/ad3n/protocompile/experimental/internal/tokenmeta"
+	"github.com/ad3n/protocompile/experimental/report"
+	"github.com/ad3n/protocompile/experimental/token"
+	"github.com/ad3n/protocompile/experimental/token/keyword"
+	"github.com/ad3n/protocompile/internal/ext/stringsx"
+	"github.com/ad3n/protocompile/internal/ext/unicodex"
 )
 
 // loop is the main loop of the lexer.

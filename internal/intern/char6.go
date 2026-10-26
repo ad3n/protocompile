@@ -17,7 +17,7 @@ package intern
 import (
 	"strings"
 
-	"github.com/bufbuild/protocompile/internal/ext/unsafex"
+	"github.com/ad3n/protocompile/internal/ext/unsafex"
 )
 
 const (

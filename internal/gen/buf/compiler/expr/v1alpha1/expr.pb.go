@@ -1670,8 +1670,8 @@ const file_buf_compiler_expr_v1alpha1_expr_proto_rawDesc = "" +
 	"\x0fBRACKETS_PARENS\x10\x01\x12\x13\n" +
 	"\x0fBRACKETS_SQUARE\x10\x02\x12\x12\n" +
 	"\x0eBRACKETS_CURLY\x10\x03\x12\x12\n" +
-	"\x0eBRACKETS_ANGLE\x10\x04B\x8d\x02\n" +
-	"\x1ecom.buf.compiler.expr.v1alpha1B\tExprProtoP\x01ZUgithub.com/bufbuild/protocompile/internal/gen/buf/compiler/expr/v1alpha1;exprv1alpha1\xa2\x02\x03BCE\xaa\x02\x1aBuf.Compiler.Expr.V1alpha1\xca\x02\x1aBuf\\Compiler\\Expr\\V1alpha1\xe2\x02&Buf\\Compiler\\Expr\\V1alpha1\\GPBMetadata\xea\x02\x1dBuf::Compiler::Expr::V1alpha1b\x06proto3"
+	"\x0eBRACKETS_ANGLE\x10\x04B\x89\x02\n" +
+	"\x1ecom.buf.compiler.expr.v1alpha1B\tExprProtoP\x01ZQgithub.com/ad3n/protocompile/internal/gen/buf/compiler/expr/v1alpha1;exprv1alpha1\xa2\x02\x03BCE\xaa\x02\x1aBuf.Compiler.Expr.V1alpha1\xca\x02\x1aBuf\\Compiler\\Expr\\V1alpha1\xe2\x02&Buf\\Compiler\\Expr\\V1alpha1\\GPBMetadata\xea\x02\x1dBuf::Compiler::Expr::V1alpha1b\x06proto3"
 
 var (
 	file_buf_compiler_expr_v1alpha1_expr_proto_rawDescOnce sync.Once

@@ -19,10 +19,10 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/bufbuild/protocompile/experimental/id"
-	"github.com/bufbuild/protocompile/experimental/token"
-	"github.com/bufbuild/protocompile/experimental/token/keyword"
-	"github.com/bufbuild/protocompile/internal/ext/slicesx"
+	"github.com/ad3n/protocompile/experimental/id"
+	"github.com/ad3n/protocompile/experimental/token"
+	"github.com/ad3n/protocompile/experimental/token/keyword"
+	"github.com/ad3n/protocompile/internal/ext/slicesx"
 )
 
 // commentTracker is used to track and attribute comments in a token stream. All attributed

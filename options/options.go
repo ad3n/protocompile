@@ -39,14 +39,14 @@ import (
 	"google.golang.org/protobuf/types/descriptorpb"
 	"google.golang.org/protobuf/types/dynamicpb"
 
-	"github.com/bufbuild/protocompile/ast"
-	"github.com/bufbuild/protocompile/internal"
-	"github.com/bufbuild/protocompile/internal/messageset"
-	"github.com/bufbuild/protocompile/internal/tags"
-	"github.com/bufbuild/protocompile/linker"
-	"github.com/bufbuild/protocompile/parser"
-	"github.com/bufbuild/protocompile/reporter"
-	"github.com/bufbuild/protocompile/sourceinfo"
+	"github.com/ad3n/protocompile/ast"
+	"github.com/ad3n/protocompile/internal"
+	"github.com/ad3n/protocompile/internal/messageset"
+	"github.com/ad3n/protocompile/internal/tags"
+	"github.com/ad3n/protocompile/linker"
+	"github.com/ad3n/protocompile/parser"
+	"github.com/ad3n/protocompile/reporter"
+	"github.com/ad3n/protocompile/sourceinfo"
 )
 
 type interpreter struct {

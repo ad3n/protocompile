@@ -18,10 +18,10 @@ import (
 	"reflect"
 	"strings"
 
-	"github.com/bufbuild/protocompile/experimental/id"
-	"github.com/bufbuild/protocompile/experimental/report"
-	"github.com/bufbuild/protocompile/internal/arena"
-	"github.com/bufbuild/protocompile/internal/intern"
+	"github.com/ad3n/protocompile/experimental/id"
+	"github.com/ad3n/protocompile/experimental/report"
+	"github.com/ad3n/protocompile/internal/arena"
+	"github.com/ad3n/protocompile/internal/intern"
 )
 
 // builtins contains those symbols that are built into the language, referenced

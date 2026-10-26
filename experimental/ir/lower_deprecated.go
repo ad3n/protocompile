@@ -15,10 +15,10 @@
 package ir
 
 import (
-	"github.com/bufbuild/protocompile/experimental/report"
-	"github.com/bufbuild/protocompile/experimental/report/rtags"
-	"github.com/bufbuild/protocompile/experimental/seq"
-	"github.com/bufbuild/protocompile/experimental/source"
+	"github.com/ad3n/protocompile/experimental/report"
+	"github.com/ad3n/protocompile/experimental/report/rtags"
+	"github.com/ad3n/protocompile/experimental/seq"
+	"github.com/ad3n/protocompile/experimental/source"
 )
 
 // checkDeprecated checks for deprecation warnings in the given file.

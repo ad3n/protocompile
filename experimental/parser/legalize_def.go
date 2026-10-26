@@ -17,14 +17,14 @@ package parser
 import (
 	"unicode"
 
-	"github.com/bufbuild/protocompile/experimental/ast"
-	"github.com/bufbuild/protocompile/experimental/ast/syntax"
-	"github.com/bufbuild/protocompile/experimental/internal/erredition"
-	"github.com/bufbuild/protocompile/experimental/internal/errtoken"
-	"github.com/bufbuild/protocompile/experimental/internal/taxa"
-	"github.com/bufbuild/protocompile/experimental/report"
-	"github.com/bufbuild/protocompile/experimental/source"
-	"github.com/bufbuild/protocompile/experimental/token/keyword"
+	"github.com/ad3n/protocompile/experimental/ast"
+	"github.com/ad3n/protocompile/experimental/ast/syntax"
+	"github.com/ad3n/protocompile/experimental/internal/erredition"
+	"github.com/ad3n/protocompile/experimental/internal/errtoken"
+	"github.com/ad3n/protocompile/experimental/internal/taxa"
+	"github.com/ad3n/protocompile/experimental/report"
+	"github.com/ad3n/protocompile/experimental/source"
+	"github.com/ad3n/protocompile/experimental/token/keyword"
 )
 
 // Map of a def kind to the valid parents it can have.

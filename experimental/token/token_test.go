@@ -20,9 +20,9 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/bufbuild/protocompile/experimental/source"
-	"github.com/bufbuild/protocompile/experimental/token"
-	"github.com/bufbuild/protocompile/experimental/token/keyword"
+	"github.com/ad3n/protocompile/experimental/source"
+	"github.com/ad3n/protocompile/experimental/token"
+	"github.com/ad3n/protocompile/experimental/token/keyword"
 )
 
 func TestNilToken(t *testing.T) {

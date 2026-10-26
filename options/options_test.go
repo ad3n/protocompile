@@ -32,13 +32,13 @@ import (
 	"google.golang.org/protobuf/reflect/protoregistry"
 	"google.golang.org/protobuf/types/descriptorpb"
 
-	"github.com/bufbuild/protocompile"
-	"github.com/bufbuild/protocompile/internal/prototest"
-	"github.com/bufbuild/protocompile/linker"
-	"github.com/bufbuild/protocompile/options"
-	"github.com/bufbuild/protocompile/parser"
-	"github.com/bufbuild/protocompile/protoutil"
-	"github.com/bufbuild/protocompile/reporter"
+	"github.com/ad3n/protocompile"
+	"github.com/ad3n/protocompile/internal/prototest"
+	"github.com/ad3n/protocompile/linker"
+	"github.com/ad3n/protocompile/options"
+	"github.com/ad3n/protocompile/parser"
+	"github.com/ad3n/protocompile/protoutil"
+	"github.com/ad3n/protocompile/reporter"
 )
 
 type ident string

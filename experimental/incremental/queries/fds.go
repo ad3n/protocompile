@@ -19,11 +19,11 @@ import (
 
 	"google.golang.org/protobuf/types/descriptorpb"
 
-	"github.com/bufbuild/protocompile/experimental/fdp"
-	"github.com/bufbuild/protocompile/experimental/incremental"
-	"github.com/bufbuild/protocompile/experimental/ir"
-	"github.com/bufbuild/protocompile/experimental/source"
-	"github.com/bufbuild/protocompile/internal/ext/slicesx"
+	"github.com/ad3n/protocompile/experimental/fdp"
+	"github.com/ad3n/protocompile/experimental/incremental"
+	"github.com/ad3n/protocompile/experimental/ir"
+	"github.com/ad3n/protocompile/experimental/source"
+	"github.com/ad3n/protocompile/internal/ext/slicesx"
 )
 
 // FDS is an [incremental.Query] that produces a [*descriptorpb.FileDescriptorSet].

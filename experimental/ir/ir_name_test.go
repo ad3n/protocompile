@@ -19,7 +19,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/bufbuild/protocompile/experimental/ir"
+	"github.com/ad3n/protocompile/experimental/ir"
 )
 
 func TestFullNameAbsolute(t *testing.T) {

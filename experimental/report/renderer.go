@@ -29,14 +29,14 @@ import (
 
 	"google.golang.org/protobuf/encoding/protojson"
 
-	"github.com/bufbuild/protocompile/experimental/source"
-	"github.com/bufbuild/protocompile/experimental/source/length"
-	"github.com/bufbuild/protocompile/internal/ext/cmpx"
-	"github.com/bufbuild/protocompile/internal/ext/iterx"
-	"github.com/bufbuild/protocompile/internal/ext/slicesx"
-	"github.com/bufbuild/protocompile/internal/ext/stringsx"
-	"github.com/bufbuild/protocompile/internal/ext/unicodex"
-	"github.com/bufbuild/protocompile/internal/interval"
+	"github.com/ad3n/protocompile/experimental/source"
+	"github.com/ad3n/protocompile/experimental/source/length"
+	"github.com/ad3n/protocompile/internal/ext/cmpx"
+	"github.com/ad3n/protocompile/internal/ext/iterx"
+	"github.com/ad3n/protocompile/internal/ext/slicesx"
+	"github.com/ad3n/protocompile/internal/ext/stringsx"
+	"github.com/ad3n/protocompile/internal/ext/unicodex"
+	"github.com/ad3n/protocompile/internal/interval"
 )
 
 // Renderer configures a diagnostic rendering operation.

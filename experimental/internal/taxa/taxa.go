@@ -24,10 +24,10 @@ package taxa
 import (
 	"fmt"
 
-	"github.com/bufbuild/protocompile/experimental/token/keyword"
+	"github.com/ad3n/protocompile/experimental/token/keyword"
 )
 
-//go:generate go run github.com/bufbuild/protocompile/internal/enum noun.yaml
+//go:generate go run github.com/ad3n/protocompile/internal/enum noun.yaml
 
 const (
 	keywordCount = 135 // Verified by a unit test.

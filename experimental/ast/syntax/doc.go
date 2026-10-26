@@ -16,4 +16,4 @@
 // that Protocompile understands.
 package syntax
 
-//go:generate go run github.com/bufbuild/protocompile/internal/enum syntax.yaml
+//go:generate go run github.com/ad3n/protocompile/internal/enum syntax.yaml

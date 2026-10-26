@@ -17,12 +17,12 @@ package queries
 import (
 	"slices"
 
-	"github.com/bufbuild/protocompile/experimental/incremental"
-	"github.com/bufbuild/protocompile/experimental/ir"
-	"github.com/bufbuild/protocompile/experimental/seq"
-	"github.com/bufbuild/protocompile/experimental/source"
-	"github.com/bufbuild/protocompile/internal/ext/mapsx"
-	"github.com/bufbuild/protocompile/internal/ext/slicesx"
+	"github.com/ad3n/protocompile/experimental/incremental"
+	"github.com/ad3n/protocompile/experimental/ir"
+	"github.com/ad3n/protocompile/experimental/seq"
+	"github.com/ad3n/protocompile/experimental/source"
+	"github.com/ad3n/protocompile/internal/ext/mapsx"
+	"github.com/ad3n/protocompile/internal/ext/slicesx"
 )
 
 // Link is an [incremental.Query] for the lowered IR files [*ir.File] of the given

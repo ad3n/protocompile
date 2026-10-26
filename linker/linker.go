@@ -19,9 +19,9 @@ import (
 
 	"google.golang.org/protobuf/reflect/protoreflect"
 
-	"github.com/bufbuild/protocompile/ast"
-	"github.com/bufbuild/protocompile/parser"
-	"github.com/bufbuild/protocompile/reporter"
+	"github.com/ad3n/protocompile/ast"
+	"github.com/ad3n/protocompile/parser"
+	"github.com/ad3n/protocompile/reporter"
 )
 
 // Link handles linking a parsed descriptor proto into a fully-linked descriptor.

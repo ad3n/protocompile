@@ -19,9 +19,9 @@ import (
 
 	"github.com/rivo/uniseg"
 
-	"github.com/bufbuild/protocompile/internal/ext/iterx"
-	"github.com/bufbuild/protocompile/internal/ext/slicesx"
-	"github.com/bufbuild/protocompile/internal/ext/stringsx"
+	"github.com/ad3n/protocompile/internal/ext/iterx"
+	"github.com/ad3n/protocompile/internal/ext/slicesx"
+	"github.com/ad3n/protocompile/internal/ext/stringsx"
 )
 
 type layout struct {

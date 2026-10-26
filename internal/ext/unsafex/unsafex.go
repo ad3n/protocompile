@@ -22,7 +22,7 @@ import (
 	"sync"
 	"unsafe"
 
-	"github.com/bufbuild/protocompile/internal/ext/bitsx"
+	"github.com/ad3n/protocompile/internal/ext/bitsx"
 )
 
 // NoCopy can be embedded in a type to trigger go vet's no copy lint.

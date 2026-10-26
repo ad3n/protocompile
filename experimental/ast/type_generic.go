@@ -17,10 +17,10 @@ package ast
 import (
 	"slices"
 
-	"github.com/bufbuild/protocompile/experimental/ast/predeclared"
-	"github.com/bufbuild/protocompile/experimental/id"
-	"github.com/bufbuild/protocompile/experimental/source"
-	"github.com/bufbuild/protocompile/experimental/token"
+	"github.com/ad3n/protocompile/experimental/ast/predeclared"
+	"github.com/ad3n/protocompile/experimental/id"
+	"github.com/ad3n/protocompile/experimental/source"
+	"github.com/ad3n/protocompile/experimental/token"
 )
 
 // TypeGeneric is a type with generic arguments.

@@ -17,7 +17,7 @@
 package tokenmeta
 
 import (
-	"github.com/bufbuild/protocompile/internal/decimal"
+	"github.com/ad3n/protocompile/internal/decimal"
 )
 
 // Meta is a type defined in this package.

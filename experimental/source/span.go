@@ -21,8 +21,8 @@ import (
 	"slices"
 	"unicode/utf8"
 
-	"github.com/bufbuild/protocompile/experimental/source/length"
-	"github.com/bufbuild/protocompile/internal/ext/iterx"
+	"github.com/ad3n/protocompile/experimental/source/length"
+	"github.com/ad3n/protocompile/internal/ext/iterx"
 )
 
 // Spanner is any type with a [Span].

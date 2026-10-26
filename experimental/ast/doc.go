@@ -88,9 +88,9 @@
 //
 // # Coming Soon
 //
-// This library will replace the existing [github.com/bufbuild/protocompile/ast]
+// This library will replace the existing [github.com/ad3n/protocompile/ast]
 // library. Outside of this file, documentation is written assuming this has
 // already happened.
 package ast
 
-//go:generate go run github.com/bufbuild/protocompile/internal/enum enums.yaml
+//go:generate go run github.com/ad3n/protocompile/internal/enum enums.yaml

@@ -17,9 +17,9 @@ package queries
 import (
 	"google.golang.org/protobuf/types/descriptorpb"
 
-	"github.com/bufbuild/protocompile/experimental/fdp"
-	"github.com/bufbuild/protocompile/experimental/incremental"
-	"github.com/bufbuild/protocompile/experimental/ir"
+	"github.com/ad3n/protocompile/experimental/fdp"
+	"github.com/ad3n/protocompile/experimental/incremental"
+	"github.com/ad3n/protocompile/experimental/ir"
 )
 
 // FDP is an [incremental.Query] that converts the lowered IR files [*ir.File]

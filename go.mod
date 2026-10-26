@@ -1,4 +1,4 @@
-module github.com/bufbuild/protocompile
+module github.com/ad3n/protocompile
 
 go 1.27.3
 

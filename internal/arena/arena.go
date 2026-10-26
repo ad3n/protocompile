@@ -34,7 +34,7 @@ import (
 	"math/bits"
 	"strings"
 
-	"github.com/bufbuild/protocompile/internal/ext/slicesx"
+	"github.com/ad3n/protocompile/internal/ext/slicesx"
 )
 
 // pointersMinLenShift is the log2 of the size of the smallest slice in

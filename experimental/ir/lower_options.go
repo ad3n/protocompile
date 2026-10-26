@@ -18,16 +18,16 @@ import (
 	"fmt"
 	"iter"
 
-	"github.com/bufbuild/protocompile/experimental/ast"
-	"github.com/bufbuild/protocompile/experimental/id"
-	"github.com/bufbuild/protocompile/experimental/internal/taxa"
-	"github.com/bufbuild/protocompile/experimental/report"
-	"github.com/bufbuild/protocompile/experimental/seq"
-	"github.com/bufbuild/protocompile/experimental/source"
-	"github.com/bufbuild/protocompile/experimental/token/keyword"
-	"github.com/bufbuild/protocompile/internal/ext/iterx"
-	"github.com/bufbuild/protocompile/internal/intern"
-	"github.com/bufbuild/protocompile/internal/messageset"
+	"github.com/ad3n/protocompile/experimental/ast"
+	"github.com/ad3n/protocompile/experimental/id"
+	"github.com/ad3n/protocompile/experimental/internal/taxa"
+	"github.com/ad3n/protocompile/experimental/report"
+	"github.com/ad3n/protocompile/experimental/seq"
+	"github.com/ad3n/protocompile/experimental/source"
+	"github.com/ad3n/protocompile/experimental/token/keyword"
+	"github.com/ad3n/protocompile/internal/ext/iterx"
+	"github.com/ad3n/protocompile/internal/intern"
+	"github.com/ad3n/protocompile/internal/messageset"
 )
 
 // checkMessageSetFieldUsage reports an error if the given field belongs to a

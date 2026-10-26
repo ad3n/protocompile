@@ -15,10 +15,10 @@
 package astx
 
 import (
-	"github.com/bufbuild/protocompile/experimental/ast"
-	"github.com/bufbuild/protocompile/experimental/id"
-	"github.com/bufbuild/protocompile/experimental/token"
-	"github.com/bufbuild/protocompile/internal/ext/unsafex"
+	"github.com/ad3n/protocompile/experimental/ast"
+	"github.com/ad3n/protocompile/experimental/id"
+	"github.com/ad3n/protocompile/experimental/token"
+	"github.com/ad3n/protocompile/internal/ext/unsafex"
 )
 
 // NewPath creates a new parser-generated path.

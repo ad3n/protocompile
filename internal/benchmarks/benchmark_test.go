@@ -34,16 +34,16 @@ import (
 	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/types/descriptorpb"
 
-	"github.com/bufbuild/protocompile"
-	"github.com/bufbuild/protocompile/ast"
-	"github.com/bufbuild/protocompile/internal/ext/bitsx"
-	"github.com/bufbuild/protocompile/internal/protoc"
-	"github.com/bufbuild/protocompile/internal/testing/googleapis"
-	"github.com/bufbuild/protocompile/internal/testing/memory"
-	"github.com/bufbuild/protocompile/parser"
-	"github.com/bufbuild/protocompile/parser/fastscan"
-	"github.com/bufbuild/protocompile/protoutil"
-	"github.com/bufbuild/protocompile/reporter"
+	"github.com/ad3n/protocompile"
+	"github.com/ad3n/protocompile/ast"
+	"github.com/ad3n/protocompile/internal/ext/bitsx"
+	"github.com/ad3n/protocompile/internal/protoc"
+	"github.com/ad3n/protocompile/internal/testing/googleapis"
+	"github.com/ad3n/protocompile/internal/testing/memory"
+	"github.com/ad3n/protocompile/parser"
+	"github.com/ad3n/protocompile/parser/fastscan"
+	"github.com/ad3n/protocompile/protoutil"
+	"github.com/ad3n/protocompile/reporter"
 )
 
 var (

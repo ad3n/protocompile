@@ -21,9 +21,9 @@ import (
 	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/types/descriptorpb"
 
-	"github.com/bufbuild/protocompile/experimental/ir"
-	"github.com/bufbuild/protocompile/experimental/source"
-	"github.com/bufbuild/protocompile/internal/ext/iterx"
+	"github.com/ad3n/protocompile/experimental/ir"
+	"github.com/ad3n/protocompile/experimental/source"
+	"github.com/ad3n/protocompile/internal/ext/iterx"
 )
 
 // debug is a helper for building SourceCodeInfo.

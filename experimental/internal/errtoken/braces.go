@@ -15,9 +15,9 @@
 package errtoken
 
 import (
-	"github.com/bufbuild/protocompile/experimental/report"
-	"github.com/bufbuild/protocompile/experimental/source"
-	"github.com/bufbuild/protocompile/experimental/token/keyword"
+	"github.com/ad3n/protocompile/experimental/report"
+	"github.com/ad3n/protocompile/experimental/source"
+	"github.com/ad3n/protocompile/experimental/token/keyword"
 )
 
 // Unmatched diagnoses a delimiter for which we found one half of a matched

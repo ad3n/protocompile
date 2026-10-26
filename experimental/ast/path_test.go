@@ -22,11 +22,11 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/bufbuild/protocompile/experimental/ast"
-	"github.com/bufbuild/protocompile/experimental/internal/astx"
-	"github.com/bufbuild/protocompile/experimental/source"
-	"github.com/bufbuild/protocompile/experimental/token"
-	"github.com/bufbuild/protocompile/internal/ext/iterx"
+	"github.com/ad3n/protocompile/experimental/ast"
+	"github.com/ad3n/protocompile/experimental/internal/astx"
+	"github.com/ad3n/protocompile/experimental/source"
+	"github.com/ad3n/protocompile/experimental/token"
+	"github.com/ad3n/protocompile/internal/ext/iterx"
 )
 
 func TestNaturalSplit(t *testing.T) {

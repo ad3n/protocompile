@@ -15,15 +15,15 @@
 package parser
 
 import (
-	"github.com/bufbuild/protocompile/experimental/ast"
-	"github.com/bufbuild/protocompile/experimental/internal/errtoken"
-	"github.com/bufbuild/protocompile/experimental/internal/just"
-	"github.com/bufbuild/protocompile/experimental/internal/taxa"
-	"github.com/bufbuild/protocompile/experimental/report"
-	"github.com/bufbuild/protocompile/experimental/token"
-	"github.com/bufbuild/protocompile/experimental/token/keyword"
-	"github.com/bufbuild/protocompile/internal"
-	"github.com/bufbuild/protocompile/internal/ext/slicesx"
+	"github.com/ad3n/protocompile/experimental/ast"
+	"github.com/ad3n/protocompile/experimental/internal/errtoken"
+	"github.com/ad3n/protocompile/experimental/internal/just"
+	"github.com/ad3n/protocompile/experimental/internal/taxa"
+	"github.com/ad3n/protocompile/experimental/report"
+	"github.com/ad3n/protocompile/experimental/token"
+	"github.com/ad3n/protocompile/experimental/token/keyword"
+	"github.com/ad3n/protocompile/internal"
+	"github.com/ad3n/protocompile/internal/ext/slicesx"
 )
 
 // parseExpr attempts to parse a full expression.

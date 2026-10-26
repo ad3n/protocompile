@@ -15,9 +15,9 @@
 package printer
 
 import (
-	"github.com/bufbuild/protocompile/experimental/ast"
-	"github.com/bufbuild/protocompile/experimental/token"
-	"github.com/bufbuild/protocompile/internal/ext/iterx"
+	"github.com/ad3n/protocompile/experimental/ast"
+	"github.com/ad3n/protocompile/experimental/token"
+	"github.com/ad3n/protocompile/internal/ext/iterx"
 )
 
 // pathFirstToken returns the separator of the first component if set,

@@ -18,7 +18,7 @@ import (
 	"sync/atomic"
 	"testing"
 
-	"github.com/bufbuild/protocompile/internal/ext/synctestx"
+	"github.com/ad3n/protocompile/internal/ext/synctestx"
 )
 
 // Regression test for https://github.com/bufbuild/protocompile/issues/756:

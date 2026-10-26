@@ -19,8 +19,8 @@ import (
 	"iter"
 	"slices"
 
-	"github.com/bufbuild/protocompile/experimental/ast"
-	"github.com/bufbuild/protocompile/experimental/token"
+	"github.com/ad3n/protocompile/experimental/ast"
+	"github.com/ad3n/protocompile/experimental/token"
 )
 
 type declSortRank int

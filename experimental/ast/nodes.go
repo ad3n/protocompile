@@ -19,9 +19,9 @@ import (
 	"math"
 	"slices"
 
-	"github.com/bufbuild/protocompile/experimental/id"
-	"github.com/bufbuild/protocompile/experimental/token"
-	"github.com/bufbuild/protocompile/internal/ext/iterx"
+	"github.com/ad3n/protocompile/experimental/id"
+	"github.com/ad3n/protocompile/experimental/token"
+	"github.com/ad3n/protocompile/internal/ext/iterx"
 )
 
 // Nodes provides storage for the various AST node types, and can be used

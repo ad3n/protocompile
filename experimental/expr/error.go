@@ -15,8 +15,8 @@
 package expr
 
 import (
-	"github.com/bufbuild/protocompile/experimental/id"
-	"github.com/bufbuild/protocompile/experimental/source"
+	"github.com/ad3n/protocompile/experimental/id"
+	"github.com/ad3n/protocompile/experimental/source"
 )
 
 // Error is an expression produced due to a parse failure, where a non-zero

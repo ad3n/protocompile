@@ -19,19 +19,19 @@ import (
 
 	"google.golang.org/protobuf/types/descriptorpb"
 
-	"github.com/bufbuild/protocompile/experimental/ast"
-	"github.com/bufbuild/protocompile/experimental/ast/predeclared"
-	"github.com/bufbuild/protocompile/experimental/ast/syntax"
-	"github.com/bufbuild/protocompile/experimental/id"
-	"github.com/bufbuild/protocompile/experimental/internal/taxa"
-	"github.com/bufbuild/protocompile/experimental/ir/presence"
-	"github.com/bufbuild/protocompile/experimental/seq"
-	"github.com/bufbuild/protocompile/internal/arena"
-	"github.com/bufbuild/protocompile/internal/intern"
-	"github.com/bufbuild/protocompile/internal/tags"
+	"github.com/ad3n/protocompile/experimental/ast"
+	"github.com/ad3n/protocompile/experimental/ast/predeclared"
+	"github.com/ad3n/protocompile/experimental/ast/syntax"
+	"github.com/ad3n/protocompile/experimental/id"
+	"github.com/ad3n/protocompile/experimental/internal/taxa"
+	"github.com/ad3n/protocompile/experimental/ir/presence"
+	"github.com/ad3n/protocompile/experimental/seq"
+	"github.com/ad3n/protocompile/internal/arena"
+	"github.com/ad3n/protocompile/internal/intern"
+	"github.com/ad3n/protocompile/internal/tags"
 )
 
-//go:generate go run github.com/bufbuild/protocompile/internal/enum option_target.yaml
+//go:generate go run github.com/ad3n/protocompile/internal/enum option_target.yaml
 
 // Member is a Protobuf message field, enum value, or extension field.
 //

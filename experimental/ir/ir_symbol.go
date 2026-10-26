@@ -20,16 +20,16 @@ import (
 	"slices"
 	"sync"
 
-	"github.com/bufbuild/protocompile/experimental/id"
-	"github.com/bufbuild/protocompile/experimental/internal/taxa"
-	"github.com/bufbuild/protocompile/experimental/report"
-	"github.com/bufbuild/protocompile/experimental/source"
-	"github.com/bufbuild/protocompile/internal/arena"
-	"github.com/bufbuild/protocompile/internal/ext/slicesx"
-	"github.com/bufbuild/protocompile/internal/intern"
+	"github.com/ad3n/protocompile/experimental/id"
+	"github.com/ad3n/protocompile/experimental/internal/taxa"
+	"github.com/ad3n/protocompile/experimental/report"
+	"github.com/ad3n/protocompile/experimental/source"
+	"github.com/ad3n/protocompile/internal/arena"
+	"github.com/ad3n/protocompile/internal/ext/slicesx"
+	"github.com/ad3n/protocompile/internal/intern"
 )
 
-//go:generate go run github.com/bufbuild/protocompile/internal/enum symbol_kind.yaml
+//go:generate go run github.com/ad3n/protocompile/internal/enum symbol_kind.yaml
 
 // Symbol is an entry in a [File]'s symbol table.
 //

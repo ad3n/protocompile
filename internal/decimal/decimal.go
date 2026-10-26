@@ -21,8 +21,8 @@ import (
 	"math/big"
 	"unsafe"
 
-	"github.com/bufbuild/protocompile/internal/ext/bigx"
-	"github.com/bufbuild/protocompile/internal/ext/unsafex"
+	"github.com/ad3n/protocompile/internal/ext/bigx"
+	"github.com/ad3n/protocompile/internal/ext/unsafex"
 )
 
 const (

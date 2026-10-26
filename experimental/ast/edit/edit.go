@@ -18,8 +18,8 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/bufbuild/protocompile/experimental/ast"
-	"github.com/bufbuild/protocompile/experimental/seq"
+	"github.com/ad3n/protocompile/experimental/ast"
+	"github.com/ad3n/protocompile/experimental/seq"
 )
 
 // Kind is the kind of operation an [Edit] performs.

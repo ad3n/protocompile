@@ -20,12 +20,12 @@ import (
 
 	"google.golang.org/protobuf/reflect/protoreflect"
 
-	"github.com/bufbuild/protocompile/ast"
-	"github.com/bufbuild/protocompile/internal"
-	"github.com/bufbuild/protocompile/internal/tags"
-	"github.com/bufbuild/protocompile/protoutil"
-	"github.com/bufbuild/protocompile/reporter"
-	"github.com/bufbuild/protocompile/walk"
+	"github.com/ad3n/protocompile/ast"
+	"github.com/ad3n/protocompile/internal"
+	"github.com/ad3n/protocompile/internal/tags"
+	"github.com/ad3n/protocompile/protoutil"
+	"github.com/ad3n/protocompile/reporter"
+	"github.com/ad3n/protocompile/walk"
 )
 
 const unknownFilePath = "<unknown file>"

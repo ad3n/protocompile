@@ -19,8 +19,8 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/bufbuild/protocompile/internal/ext/mapsx"
-	"github.com/bufbuild/protocompile/internal/intern"
+	"github.com/ad3n/protocompile/internal/ext/mapsx"
+	"github.com/ad3n/protocompile/internal/intern"
 )
 
 func TestSyntheticNames(t *testing.T) {

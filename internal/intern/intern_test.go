@@ -26,11 +26,11 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/bufbuild/protocompile/internal/ext/slicesx"
-	"github.com/bufbuild/protocompile/internal/ext/synctestx"
-	"github.com/bufbuild/protocompile/internal/ext/syncx"
-	"github.com/bufbuild/protocompile/internal/inlinetest"
-	"github.com/bufbuild/protocompile/internal/intern"
+	"github.com/ad3n/protocompile/internal/ext/slicesx"
+	"github.com/ad3n/protocompile/internal/ext/synctestx"
+	"github.com/ad3n/protocompile/internal/ext/syncx"
+	"github.com/ad3n/protocompile/internal/inlinetest"
+	"github.com/ad3n/protocompile/internal/intern"
 )
 
 func TestIntern(t *testing.T) {

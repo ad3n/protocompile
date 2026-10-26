@@ -22,9 +22,9 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/bufbuild/protocompile/internal/ext/iterx"
-	"github.com/bufbuild/protocompile/internal/ext/unicodex"
-	"github.com/bufbuild/protocompile/internal/ext/unsafex"
+	"github.com/ad3n/protocompile/internal/ext/iterx"
+	"github.com/ad3n/protocompile/internal/ext/unicodex"
+	"github.com/ad3n/protocompile/internal/ext/unsafex"
 )
 
 // writer implements low-level writing helpers, including a custom buffering

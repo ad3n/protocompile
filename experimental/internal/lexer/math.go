@@ -18,7 +18,7 @@ import (
 	"math/big"
 	"math/bits"
 
-	"github.com/bufbuild/protocompile/internal/ext/unicodex"
+	"github.com/ad3n/protocompile/internal/ext/unicodex"
 )
 
 type parseIntResult struct {

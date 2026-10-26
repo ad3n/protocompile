@@ -18,12 +18,12 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/bufbuild/protocompile/experimental/ast/printer"
-	"github.com/bufbuild/protocompile/experimental/parser"
-	"github.com/bufbuild/protocompile/experimental/report"
-	"github.com/bufbuild/protocompile/experimental/seq"
-	"github.com/bufbuild/protocompile/experimental/source"
-	"github.com/bufbuild/protocompile/internal/golden"
+	"github.com/ad3n/protocompile/experimental/ast/printer"
+	"github.com/ad3n/protocompile/experimental/parser"
+	"github.com/ad3n/protocompile/experimental/report"
+	"github.com/ad3n/protocompile/experimental/seq"
+	"github.com/ad3n/protocompile/experimental/source"
+	"github.com/ad3n/protocompile/internal/golden"
 )
 
 // TestRoundTrip exercises round-tripping a protobuf source through [printer.PrintFile].

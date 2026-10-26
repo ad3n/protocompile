@@ -15,9 +15,9 @@
 package ir
 
 import (
-	"github.com/bufbuild/protocompile/experimental/report"
-	"github.com/bufbuild/protocompile/experimental/seq"
-	"github.com/bufbuild/protocompile/internal/intern"
+	"github.com/ad3n/protocompile/experimental/report"
+	"github.com/ad3n/protocompile/experimental/seq"
+	"github.com/ad3n/protocompile/internal/intern"
 )
 
 // DedupExportedSymbols takes a report and the given *[File]s and checks for duplicate

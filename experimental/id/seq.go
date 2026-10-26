@@ -15,7 +15,7 @@
 package id
 
 import (
-	"github.com/bufbuild/protocompile/experimental/seq"
+	"github.com/ad3n/protocompile/experimental/seq"
 )
 
 // Seq is an array of nodes which uses a compressed representation.

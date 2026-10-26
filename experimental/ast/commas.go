@@ -17,9 +17,9 @@ package ast
 import (
 	"slices"
 
-	"github.com/bufbuild/protocompile/experimental/id"
-	"github.com/bufbuild/protocompile/experimental/seq"
-	"github.com/bufbuild/protocompile/experimental/token"
+	"github.com/ad3n/protocompile/experimental/id"
+	"github.com/ad3n/protocompile/experimental/seq"
+	"github.com/ad3n/protocompile/experimental/token"
 )
 
 // Commas is like [Slice], but it's for a comma-delimited list of some kind.

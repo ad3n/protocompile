@@ -18,12 +18,12 @@ package exprx
 import (
 	"fmt"
 
-	"github.com/bufbuild/protocompile/experimental/expr"
-	"github.com/bufbuild/protocompile/experimental/seq"
-	"github.com/bufbuild/protocompile/experimental/source"
-	"github.com/bufbuild/protocompile/experimental/token"
-	"github.com/bufbuild/protocompile/experimental/token/keyword"
-	exprpb "github.com/bufbuild/protocompile/internal/gen/buf/compiler/expr/v1alpha1"
+	"github.com/ad3n/protocompile/experimental/expr"
+	"github.com/ad3n/protocompile/experimental/seq"
+	"github.com/ad3n/protocompile/experimental/source"
+	"github.com/ad3n/protocompile/experimental/token"
+	"github.com/ad3n/protocompile/experimental/token/keyword"
+	exprpb "github.com/ad3n/protocompile/internal/gen/buf/compiler/expr/v1alpha1"
 )
 
 // ToProtoOptions contains options for the [File.ToProto] function.

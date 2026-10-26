@@ -22,16 +22,16 @@ import (
 
 	"gopkg.in/yaml.v3"
 
-	"github.com/bufbuild/protocompile/experimental/ast"
-	"github.com/bufbuild/protocompile/experimental/ast/edit"
-	"github.com/bufbuild/protocompile/experimental/ast/printer"
-	"github.com/bufbuild/protocompile/experimental/parser"
-	"github.com/bufbuild/protocompile/experimental/report"
-	"github.com/bufbuild/protocompile/experimental/seq"
-	"github.com/bufbuild/protocompile/experimental/source"
-	"github.com/bufbuild/protocompile/experimental/token"
-	"github.com/bufbuild/protocompile/experimental/token/keyword"
-	"github.com/bufbuild/protocompile/internal/golden"
+	"github.com/ad3n/protocompile/experimental/ast"
+	"github.com/ad3n/protocompile/experimental/ast/edit"
+	"github.com/ad3n/protocompile/experimental/ast/printer"
+	"github.com/ad3n/protocompile/experimental/parser"
+	"github.com/ad3n/protocompile/experimental/report"
+	"github.com/ad3n/protocompile/experimental/seq"
+	"github.com/ad3n/protocompile/experimental/source"
+	"github.com/ad3n/protocompile/experimental/token"
+	"github.com/ad3n/protocompile/experimental/token/keyword"
+	"github.com/ad3n/protocompile/internal/golden"
 )
 
 // TestApplyEdits exercises [edit.ApplyEdits] against testdata/edits.

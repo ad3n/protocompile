@@ -21,7 +21,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/bufbuild/protocompile/experimental/incremental"
+	"github.com/ad3n/protocompile/experimental/incremental"
 )
 
 func TestCancelWhileLeaderExecutes(t *testing.T) {

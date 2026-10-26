@@ -22,9 +22,9 @@ import (
 	"unicode/utf8"
 	"unsafe"
 
-	"github.com/bufbuild/protocompile/internal/ext/iterx"
-	"github.com/bufbuild/protocompile/internal/ext/slicesx"
-	"github.com/bufbuild/protocompile/internal/ext/unsafex"
+	"github.com/ad3n/protocompile/internal/ext/iterx"
+	"github.com/ad3n/protocompile/internal/ext/slicesx"
+	"github.com/ad3n/protocompile/internal/ext/unsafex"
 )
 
 // Rune returns the rune at the given byte index.

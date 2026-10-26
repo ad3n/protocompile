@@ -22,8 +22,8 @@ import (
 
 	"google.golang.org/protobuf/reflect/protoreflect"
 
-	"github.com/bufbuild/protocompile/internal/cases"
-	"github.com/bufbuild/protocompile/internal/tags"
+	"github.com/ad3n/protocompile/internal/cases"
+	"github.com/ad3n/protocompile/internal/tags"
 )
 
 // MaxMessageNestingDepth is the limit on message nesting depth. It matches

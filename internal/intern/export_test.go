@@ -14,7 +14,7 @@
 
 package intern
 
-import "github.com/bufbuild/protocompile/internal/ext/syncx"
+import "github.com/ad3n/protocompile/internal/ext/syncx"
 
 func (t *Table) Table() *syncx.Log[string] {
 	return &t.table

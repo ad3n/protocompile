@@ -15,8 +15,8 @@
 package expr
 
 import (
-	"github.com/bufbuild/protocompile/experimental/id"
-	"github.com/bufbuild/protocompile/experimental/token"
+	"github.com/ad3n/protocompile/experimental/id"
+	"github.com/ad3n/protocompile/experimental/token"
 )
 
 // Token is an expression corresponding to a single token: a string, a

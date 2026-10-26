@@ -20,8 +20,8 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/bufbuild/protocompile/internal/ext/cmpx"
-	"github.com/bufbuild/protocompile/internal/interval"
+	"github.com/ad3n/protocompile/internal/ext/cmpx"
+	"github.com/ad3n/protocompile/internal/interval"
 )
 
 func TestNesting(t *testing.T) {

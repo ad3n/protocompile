@@ -23,9 +23,9 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/bufbuild/protocompile/ast"
-	"github.com/bufbuild/protocompile/parser"
-	"github.com/bufbuild/protocompile/reporter"
+	"github.com/ad3n/protocompile/ast"
+	"github.com/ad3n/protocompile/parser"
+	"github.com/ad3n/protocompile/reporter"
 )
 
 func TestTokens(t *testing.T) {

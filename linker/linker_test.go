@@ -34,13 +34,13 @@ import (
 	"google.golang.org/protobuf/reflect/protoregistry"
 	"google.golang.org/protobuf/types/descriptorpb"
 
-	"github.com/bufbuild/protocompile"
-	"github.com/bufbuild/protocompile/internal/messageset"
-	"github.com/bufbuild/protocompile/internal/protoc"
-	"github.com/bufbuild/protocompile/internal/prototest"
-	"github.com/bufbuild/protocompile/linker"
-	"github.com/bufbuild/protocompile/protoutil"
-	"github.com/bufbuild/protocompile/reporter"
+	"github.com/ad3n/protocompile"
+	"github.com/ad3n/protocompile/internal/messageset"
+	"github.com/ad3n/protocompile/internal/protoc"
+	"github.com/ad3n/protocompile/internal/prototest"
+	"github.com/ad3n/protocompile/linker"
+	"github.com/ad3n/protocompile/protoutil"
+	"github.com/ad3n/protocompile/reporter"
 )
 
 func TestSimpleLink(t *testing.T) {

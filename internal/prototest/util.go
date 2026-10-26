@@ -26,8 +26,8 @@ import (
 	"google.golang.org/protobuf/testing/protocmp"
 	"google.golang.org/protobuf/types/descriptorpb"
 
-	"github.com/bufbuild/protocompile/linker"
-	"github.com/bufbuild/protocompile/protoutil"
+	"github.com/ad3n/protocompile/linker"
+	"github.com/ad3n/protocompile/protoutil"
 )
 
 func LoadDescriptorSet(t *testing.T, path string, res linker.Resolver) *descriptorpb.FileDescriptorSet {

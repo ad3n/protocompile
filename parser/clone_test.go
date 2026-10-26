@@ -25,8 +25,8 @@ import (
 	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/testing/protocmp"
 
-	"github.com/bufbuild/protocompile/ast"
-	"github.com/bufbuild/protocompile/reporter"
+	"github.com/ad3n/protocompile/ast"
+	"github.com/ad3n/protocompile/reporter"
 )
 
 func TestClone(t *testing.T) {

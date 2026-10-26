@@ -17,9 +17,9 @@ package ir
 import (
 	"sync"
 
-	"github.com/bufbuild/protocompile/experimental/ast"
-	"github.com/bufbuild/protocompile/experimental/report"
-	"github.com/bufbuild/protocompile/internal/intern"
+	"github.com/ad3n/protocompile/experimental/ast"
+	"github.com/ad3n/protocompile/experimental/report"
+	"github.com/ad3n/protocompile/internal/intern"
 )
 
 // Session is shared global configuration and state for all IR values that are

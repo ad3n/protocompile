@@ -17,13 +17,13 @@ package ir
 import (
 	"fmt"
 
-	"github.com/bufbuild/protocompile/experimental/ast/syntax"
-	"github.com/bufbuild/protocompile/experimental/internal/taxa"
-	"github.com/bufbuild/protocompile/experimental/report"
-	"github.com/bufbuild/protocompile/experimental/seq"
-	"github.com/bufbuild/protocompile/internal"
-	"github.com/bufbuild/protocompile/internal/intern"
-	"github.com/bufbuild/protocompile/internal/tags"
+	"github.com/ad3n/protocompile/experimental/ast/syntax"
+	"github.com/ad3n/protocompile/experimental/internal/taxa"
+	"github.com/ad3n/protocompile/experimental/report"
+	"github.com/ad3n/protocompile/experimental/seq"
+	"github.com/ad3n/protocompile/internal"
+	"github.com/ad3n/protocompile/internal/intern"
+	"github.com/ad3n/protocompile/internal/tags"
 )
 
 func populateJSONNames(file *File, r *report.Report) {

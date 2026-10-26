@@ -18,7 +18,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/bufbuild/protocompile/internal/cases"
+	"github.com/ad3n/protocompile/internal/cases"
 )
 
 var utilResult string

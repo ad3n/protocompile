@@ -23,8 +23,8 @@ import (
 	"google.golang.org/protobuf/reflect/protoreflect"
 	"google.golang.org/protobuf/types/descriptorpb"
 
-	"github.com/bufbuild/protocompile"
-	"github.com/bufbuild/protocompile/linker"
+	"github.com/ad3n/protocompile"
+	"github.com/ad3n/protocompile/linker"
 )
 
 func TestWithStandardImports(t *testing.T) {

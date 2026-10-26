@@ -14,7 +14,7 @@
 
 package unicodex
 
-import "github.com/bufbuild/protocompile/internal/ext/bitsx"
+import "github.com/ad3n/protocompile/internal/ext/bitsx"
 
 // ToASCIILower converts an ASCII byte to lowercase.
 func ToASCIILower(b byte) byte {

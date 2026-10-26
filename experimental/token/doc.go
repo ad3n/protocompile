@@ -37,4 +37,4 @@
 // cannot be used in diagnostics (Span() will return the zero [source.Span]).
 package token
 
-//go:generate go run github.com/bufbuild/protocompile/internal/enum kind.yaml
+//go:generate go run github.com/ad3n/protocompile/internal/enum kind.yaml

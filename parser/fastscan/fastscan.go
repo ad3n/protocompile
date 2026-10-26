@@ -19,8 +19,8 @@ import (
 	"io"
 	"strings"
 
-	"github.com/bufbuild/protocompile/ast"
-	"github.com/bufbuild/protocompile/reporter"
+	"github.com/ad3n/protocompile/ast"
+	"github.com/ad3n/protocompile/reporter"
 )
 
 var closeSymbol = map[tokenType]tokenType{

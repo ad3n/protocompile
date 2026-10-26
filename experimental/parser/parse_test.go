@@ -21,11 +21,11 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/bufbuild/protocompile/experimental/internal/astx"
-	"github.com/bufbuild/protocompile/experimental/report"
-	"github.com/bufbuild/protocompile/experimental/source"
-	"github.com/bufbuild/protocompile/internal/golden"
-	"github.com/bufbuild/protocompile/internal/prototest"
+	"github.com/ad3n/protocompile/experimental/internal/astx"
+	"github.com/ad3n/protocompile/experimental/report"
+	"github.com/ad3n/protocompile/experimental/source"
+	"github.com/ad3n/protocompile/internal/golden"
+	"github.com/ad3n/protocompile/internal/prototest"
 )
 
 const (

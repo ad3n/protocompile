@@ -1,4 +1,4 @@
-module github.com/bufbuild/protocompile/internal/tools
+module github.com/ad3n/protocompile/internal/tools
 
 go 1.27.3
 

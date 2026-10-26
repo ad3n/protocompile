@@ -19,7 +19,7 @@ import (
 	"math/big"
 	"math/bits"
 
-	"github.com/bufbuild/protocompile/internal/ext/bigx"
+	"github.com/ad3n/protocompile/internal/ext/bigx"
 )
 
 var pow10s = [...]uint64{

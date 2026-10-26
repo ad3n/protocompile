@@ -26,11 +26,11 @@ import (
 	"google.golang.org/protobuf/types/dynamicpb"
 	"google.golang.org/protobuf/types/gofeaturespb"
 
-	"github.com/bufbuild/protocompile"
-	"github.com/bufbuild/protocompile/internal/editions"
-	"github.com/bufbuild/protocompile/linker"
-	"github.com/bufbuild/protocompile/protoutil"
-	"github.com/bufbuild/protocompile/walk"
+	"github.com/ad3n/protocompile"
+	"github.com/ad3n/protocompile/internal/editions"
+	"github.com/ad3n/protocompile/linker"
+	"github.com/ad3n/protocompile/protoutil"
+	"github.com/ad3n/protocompile/walk"
 )
 
 func TestResolveFeature(t *testing.T) {

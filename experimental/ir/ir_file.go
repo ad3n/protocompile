@@ -17,15 +17,15 @@ package ir
 import (
 	"iter"
 
-	"github.com/bufbuild/protocompile/experimental/ast"
-	"github.com/bufbuild/protocompile/experimental/ast/syntax"
-	"github.com/bufbuild/protocompile/experimental/id"
-	"github.com/bufbuild/protocompile/experimental/seq"
-	"github.com/bufbuild/protocompile/internal/arena"
-	"github.com/bufbuild/protocompile/internal/ext/iterx"
-	"github.com/bufbuild/protocompile/internal/ext/unsafex"
-	"github.com/bufbuild/protocompile/internal/intern"
-	"github.com/bufbuild/protocompile/internal/toposort"
+	"github.com/ad3n/protocompile/experimental/ast"
+	"github.com/ad3n/protocompile/experimental/ast/syntax"
+	"github.com/ad3n/protocompile/experimental/id"
+	"github.com/ad3n/protocompile/experimental/seq"
+	"github.com/ad3n/protocompile/internal/arena"
+	"github.com/ad3n/protocompile/internal/ext/iterx"
+	"github.com/ad3n/protocompile/internal/ext/unsafex"
+	"github.com/ad3n/protocompile/internal/intern"
+	"github.com/ad3n/protocompile/internal/toposort"
 )
 
 // File is an IR file, which provides access to the top-level declarations of

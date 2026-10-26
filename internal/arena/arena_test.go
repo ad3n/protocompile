@@ -19,7 +19,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/bufbuild/protocompile/internal/arena"
+	"github.com/ad3n/protocompile/internal/arena"
 )
 
 func TestPointers(t *testing.T) {

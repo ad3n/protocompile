@@ -21,10 +21,10 @@ import (
 	"math/bits"
 	"strconv"
 
-	"github.com/bufbuild/protocompile/internal/ext/bigx"
-	"github.com/bufbuild/protocompile/internal/ext/bitsx"
-	"github.com/bufbuild/protocompile/internal/ext/stringsx"
-	"github.com/bufbuild/protocompile/internal/ext/unicodex"
+	"github.com/ad3n/protocompile/internal/ext/bigx"
+	"github.com/ad3n/protocompile/internal/ext/bitsx"
+	"github.com/ad3n/protocompile/internal/ext/stringsx"
+	"github.com/ad3n/protocompile/internal/ext/unicodex"
 )
 
 // Parse parses a decimal value from the given string, without losing precision.

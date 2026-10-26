@@ -26,7 +26,7 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/bufbuild/protocompile/reporter"
+	"github.com/ad3n/protocompile/reporter"
 )
 
 const poolingMaxCapacity = 64 << 10

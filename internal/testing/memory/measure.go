@@ -17,9 +17,9 @@ package memory
 import (
 	"reflect"
 
-	"github.com/bufbuild/protocompile/internal/ext/bitsx"
-	"github.com/bufbuild/protocompile/internal/ext/reflectx"
-	"github.com/bufbuild/protocompile/internal/interval"
+	"github.com/ad3n/protocompile/internal/ext/bitsx"
+	"github.com/ad3n/protocompile/internal/ext/reflectx"
+	"github.com/ad3n/protocompile/internal/interval"
 )
 
 // MeasuringTape measures how much memory a particular value used.

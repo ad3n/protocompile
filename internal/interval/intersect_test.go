@@ -21,7 +21,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/bufbuild/protocompile/internal/interval"
+	"github.com/ad3n/protocompile/internal/interval"
 )
 
 func TestInsert(t *testing.T) {
