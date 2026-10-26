@@ -1,6 +1,6 @@
 module github.com/bufbuild/protocompile/internal/benchmarks
 
-go 1.26.7
+go 1.27.3
 
 require (
 	github.com/bufbuild/protocompile v0.14.1

@@ -36,16 +36,29 @@ const MaxMessageNestingDepth = 32
 // Message values, arrays and prefix operators each count as one level.
 const MaxExpressionNestingDepth = 100
 
-// JSONName returns the default JSON name for a field with the given name.
-// This mirrors the algorithm in protoc:
-//
-//	https://github.com/protocolbuffers/protobuf/blob/v21.3/src/google/protobuf/descriptor.cc#L95
 func JSONName(name string) string {
-	return cases.Converter{
-		Case:        cases.Camel,
-		NaiveSplit:  true,
-		NoLowercase: true,
-	}.Convert(name)
+	if !strings.Contains(name, "_") && utf8.ValidString(name) {
+		return name
+	}
+
+	var buf strings.Builder
+	buf.Grow(len(name))
+	uppercase := false
+	for _, r := range name {
+		if r == '_' {
+			uppercase = true
+			continue
+		}
+
+		if uppercase {
+			r = unicode.ToUpper(r)
+			uppercase = false
+		}
+
+		buf.WriteRune(r)
+	}
+
+	return buf.String()
 }
 
 // MapEntry returns the map entry name for a field with the given name.
@@ -142,14 +155,26 @@ func CreatePrefixList(pkg string) []string {
 	return prefixes
 }
 
-// EscapeBytes escapes the value of a bytes field for use in a
-// FieldDescriptorProto.default_value.
-//
-// This implements the algorithm in protoc's C++ code, which is a port of
-// absl::CEscape. See
-// https://github.com/abseil/abseil-cpp/blob/934f613818ffcb26c942dff4a80be9a4031c662c/absl/strings/escaping.cc#L406.
 func EscapeBytes[B ~string | ~[]byte](data B) string {
-	buf := new(strings.Builder)
+	size := len(data)
+	for i := range len(data) {
+		c := data[i]
+		switch c {
+		case '\n', '\r', '\t', '"', '\'', '\\':
+			size++
+		default:
+			if c < 0x20 || c >= 0x7f {
+				size += 3
+			}
+		}
+	}
+
+	if size == len(data) {
+		return string(data)
+	}
+
+	var buf strings.Builder
+	buf.Grow(size)
 	for i := range len(data) {
 		c := data[i]
 		switch c {
@@ -167,17 +192,17 @@ func EscapeBytes[B ~string | ~[]byte](data B) string {
 			buf.WriteString("\\\\")
 		default:
 			if c >= 0x20 && c < 0x7f {
-				// simple printable characters
 				buf.WriteByte(c)
-			} else {
-				// use octal escape for all other values
-				buf.WriteRune('\\')
-				buf.WriteByte('0' + ((c >> 6) & 0x7))
-				buf.WriteByte('0' + ((c >> 3) & 0x7))
-				buf.WriteByte('0' + (c & 0x7))
+				continue
 			}
+
+			buf.WriteByte('\\')
+			buf.WriteByte('0' + ((c >> 6) & 0x7))
+			buf.WriteByte('0' + ((c >> 3) & 0x7))
+			buf.WriteByte('0' + (c & 0x7))
 		}
 	}
+
 	return buf.String()
 }
 
