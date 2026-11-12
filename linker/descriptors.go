@@ -152,7 +152,7 @@ type result struct {
 	protoreflect.FileDescriptor
 	parser.Result
 	prefix string
-	deps   Files
+	deps   dependencyIndex
 
 	// A map of all descriptors keyed by their fully-qualified name (without
 	// any leading dot).
@@ -289,8 +289,8 @@ func (r *result) SourceLocations() protoreflect.SourceLocations {
 func asSourceLocations(srcInfoProtos []*descriptorpb.SourceCodeInfo_Location) ([]protoreflect.SourceLocation, map[sourcePathKey]int) {
 	locs := make([]protoreflect.SourceLocation, len(srcInfoProtos))
 	index := make(map[sourcePathKey]int, len(srcInfoProtos))
-	prev := make(map[sourcePathKey]*protoreflect.SourceLocation, len(srcInfoProtos))
-	for i, loc := range srcInfoProtos {
+	for i := len(srcInfoProtos) - 1; i >= 0; i-- {
+		loc := srcInfoProtos[i]
 		var stLin, stCol, enLin, enCol int
 		if len(loc.Span) == 3 {
 			stLin, stCol, enCol = int(loc.Span[0]), int(loc.Span[1]), int(loc.Span[2])
@@ -309,13 +309,8 @@ func asSourceLocations(srcInfoProtos []*descriptorpb.SourceCodeInfo_Location) ([
 			EndColumn:               enCol,
 		}
 		str := pathKey(loc.Path)
-		pr := prev[str]
-		if pr == nil {
-			index[str] = i
-		} else {
-			pr.Next = i
-		}
-		prev[str] = &locs[i]
+		locs[i].Next = index[str]
+		index[str] = i
 	}
 	return locs, index
 }

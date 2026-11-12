@@ -48,8 +48,9 @@ func Link(parsed parser.Result, dependencies Files, symbols *Symbols, handler *r
 		prefix += "."
 	}
 
+	deps := newDependencyIndex(dependencies)
 	for _, imp := range parsed.FileDescriptorProto().Dependency {
-		dep := dependencies.FindFileByPath(imp)
+		dep := deps.FindFileByPath(imp)
 		if dep == nil {
 			return nil, fmt.Errorf("dependencies is missing import %q", imp)
 		}
@@ -61,7 +62,7 @@ func Link(parsed parser.Result, dependencies Files, symbols *Symbols, handler *r
 	r := &result{
 		FileDescriptor:       noOpFile,
 		Result:               parsed,
-		deps:                 dependencies,
+		deps:                 deps,
 		descriptors:          map[string]protoreflect.Descriptor{},
 		usedImports:          map[string]struct{}{},
 		prefix:               prefix,

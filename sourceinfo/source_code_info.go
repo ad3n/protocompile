@@ -20,7 +20,6 @@
 package sourceinfo
 
 import (
-	"bytes"
 	"fmt"
 	"slices"
 	"strings"
@@ -926,52 +925,49 @@ func (sci *sourceCodeInfo) combineComments(comments comments) string {
 	if comments.Len() == 0 {
 		return ""
 	}
-	var buf bytes.Buffer
-	for i, l := 0, comments.Len(); i < l; i++ {
+
+	var buf strings.Builder
+	for i, count := 0, comments.Len(); i < count; i++ {
 		c := comments.Index(i)
 		txt := c.RawText()
 		if txt[:2] == "//" {
 			buf.WriteString(txt[2:])
-			// protoc includes trailing newline for line comments,
-			// but it's not present in the AST comment. So we need
-			// to add it if present.
-			if i, ok := sci.file.Items().Next(c.AsItem()); ok {
-				info := sci.file.ItemInfo(i)
+			if next, ok := sci.file.Items().Next(c.AsItem()); ok {
+				info := sci.file.ItemInfo(next)
 				if strings.HasPrefix(info.LeadingWhitespace(), "\n") {
-					buf.WriteRune('\n')
+					buf.WriteByte('\n')
 				}
 			}
-		} else {
-			lines := strings.Split(txt[2:len(txt)-2], "\n")
-			first := true
-			for _, l := range lines {
-				if first {
-					first = false
-					buf.WriteString(l)
-					continue
-				}
-				buf.WriteByte('\n')
 
-				// strip a prefix of whitespace followed by '*'
-				j := 0
-				for j < len(l) {
-					if l[j] != ' ' && l[j] != '\t' {
-						break
-					}
-					j++
-				}
-				switch {
-				case j == len(l):
-					l = ""
-				case l[j] == '*':
-					l = l[j+1:]
-				case j > 0:
-					l = l[j:]
-				}
+			continue
+		}
 
-				buf.WriteString(l)
+		first := true
+		for line := range strings.SplitSeq(txt[2:len(txt)-2], "\n") {
+			if first {
+				first = false
+				buf.WriteString(line)
+				continue
 			}
+
+			buf.WriteByte('\n')
+			j := 0
+			for j < len(line) && (line[j] == ' ' || line[j] == '\t') {
+				j++
+			}
+
+			switch {
+			case j == len(line):
+				line = ""
+			case line[j] == '*':
+				line = line[j+1:]
+			case j > 0:
+				line = line[j:]
+			}
+
+			buf.WriteString(line)
 		}
 	}
+
 	return buf.String()
 }

@@ -20,7 +20,7 @@ import (
 	"fmt"
 	"io"
 	"strconv"
-	"strings"
+	"unicode/utf8"
 )
 
 // This file contains a streaming lexer. The lexer in the parser package loads the
@@ -80,21 +80,70 @@ type runeReader struct {
 	rr     *bufio.Reader
 	unread []rune
 	err    error
+	buffer []byte
+	used   int
+}
+
+func (rr *runeReader) buffered() []byte {
+	if len(rr.buffer) > 0 {
+		return rr.buffer
+	}
+
+	if rr.err != nil {
+		return nil
+	}
+
+	_, _ = rr.rr.Discard(rr.used)
+	rr.used = 0
+	if _, err := rr.rr.Peek(1); err != nil {
+		rr.err = err
+		return nil
+	}
+
+	rr.buffer, _ = rr.rr.Peek(rr.rr.Buffered())
+	return rr.buffer
+}
+
+func (rr *runeReader) consume(n int) {
+	rr.buffer = rr.buffer[n:]
+	rr.used += n
 }
 
 func (rr *runeReader) readRune() (r rune, err error) {
 	if rr.err != nil {
 		return 0, rr.err
 	}
+
 	if len(rr.unread) > 0 {
 		r := rr.unread[len(rr.unread)-1]
 		rr.unread = rr.unread[:len(rr.unread)-1]
 		return r, nil
 	}
+
+	buffer := rr.buffered()
+	if len(buffer) == 0 {
+		return 0, rr.err
+	}
+
+	if buffer[0] < utf8.RuneSelf {
+		rr.consume(1)
+		return rune(buffer[0]), nil
+	}
+
+	if utf8.FullRune(buffer) {
+		r, size := utf8.DecodeRune(buffer)
+		rr.consume(size)
+		return r, nil
+	}
+
+	_, _ = rr.rr.Discard(rr.used)
+	rr.used = 0
+	rr.buffer = nil
 	r, _, err = rr.rr.ReadRune()
 	if err != nil {
 		rr.err = err
 	}
+
 	return r, err
 }
 
@@ -156,7 +205,8 @@ func (l *lexer) Lex() (tokenType, string, error) {
 			return 0, "", err
 		}
 
-		if strings.ContainsRune("\n\r\t\f\v ", c) {
+		switch c {
+		case '\n', '\r', '\t', '\f', '\v', ' ':
 			l.adjustPos(c)
 			continue
 		}
@@ -256,17 +306,42 @@ func (l *lexer) readNumber(sofar ...rune) string {
 func (l *lexer) readIdentifier(first rune) string {
 	l.scratch = append(l.scratch[:0], byte(first))
 	for {
+		if len(l.input.unread) == 0 {
+			buffer := l.input.buffered()
+			n := 0
+			for n < len(buffer) {
+				c := buffer[n]
+				if c != '_' && (c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && (c < '0' || c > '9') {
+					break
+				}
+
+				n++
+			}
+
+			l.scratch = append(l.scratch, buffer[:n]...)
+			l.curCol += n
+			l.input.consume(n)
+			if n < len(buffer) || len(buffer) == 0 {
+				break
+			}
+
+			continue
+		}
+
 		c, err := l.input.readRune()
 		if err != nil {
 			break
 		}
+
 		if c != '_' && (c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && (c < '0' || c > '9') {
 			l.input.unreadRune(c)
 			break
 		}
+
 		l.adjustPos(c)
 		l.scratch = append(l.scratch, byte(c))
 	}
+
 	return string(l.scratch)
 }
 
@@ -274,6 +349,26 @@ func (l *lexer) readStringLiteral(quote rune) string {
 	buf := &l.strBuf
 	buf.Reset()
 	for {
+		if len(l.input.unread) == 0 {
+			buffer := l.input.buffered()
+			n := 0
+			for n < len(buffer) {
+				c := buffer[n]
+				if c >= utf8.RuneSelf || c == byte(quote) || c == '\\' || c == '\n' || c == '\t' {
+					break
+				}
+
+				n++
+			}
+
+			buf.Write(buffer[:n])
+			l.input.consume(n)
+			l.curCol += n
+			if n > 0 && n == len(buffer) {
+				continue
+			}
+		}
+
 		c, err := l.input.readRune()
 		if err != nil {
 			break
@@ -440,10 +535,29 @@ func (l *lexer) readStringLiteral(quote rune) string {
 
 func (l *lexer) skipToEndOfLineComment() {
 	for {
+		if len(l.input.unread) == 0 {
+			buffer := l.input.buffered()
+			if end := bytes.IndexByte(buffer, '\n'); end >= 0 {
+				l.input.consume(end + 1)
+				l.curLine++
+				l.curCol = 0
+				return
+			}
+
+			n := 0
+			for n < len(buffer) && buffer[n] < utf8.RuneSelf && buffer[n] != '\t' {
+				n++
+			}
+
+			l.input.consume(n)
+			l.curCol += n
+		}
+
 		c, err := l.input.readRune()
 		if err != nil {
 			return
 		}
+
 		l.adjustPos(c)
 		if c == '\n' {
 			return
@@ -453,6 +567,17 @@ func (l *lexer) skipToEndOfLineComment() {
 
 func (l *lexer) skipToEndOfBlockComment() {
 	for {
+		if len(l.input.unread) == 0 {
+			buffer := l.input.buffered()
+			n := 0
+			for n < len(buffer) && buffer[n] < utf8.RuneSelf && buffer[n] != '*' && buffer[n] != '\n' && buffer[n] != '\t' {
+				n++
+			}
+
+			l.input.consume(n)
+			l.curCol += n
+		}
+
 		c, err := l.input.readRune()
 		if err != nil {
 			return
