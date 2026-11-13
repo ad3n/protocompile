@@ -75,8 +75,8 @@ func (e errHasSignature) Diagnose(d *report.Diagnostic) {
 
 // errBadNest diagnoses bad nesting: parent should not contain child.
 type errBadNest struct {
-	parent       classified
 	child        source.Spanner
+	parent       classified
 	validParents taxa.Set
 }
 

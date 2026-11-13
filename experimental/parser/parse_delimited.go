@@ -33,19 +33,6 @@ type delimited[T source.Spanner] struct {
 	p *parser
 	c *token.Cursor
 
-	// What are we parsing, and within what context? This is used for
-	// generating diagnostics.
-	what, in taxa.Noun
-
-	// Permitted delimiters. If empty, assumed to be keyword.Comma.
-	delims []keyword.Keyword
-	// Whether a delimiter must be present, rather than merely optional.
-	required bool
-	// Whether iteration should expect to exhaust c.
-	exhaust bool
-	// Whether trailing delimiters are permitted.
-	trailing bool
-
 	// A function for parsing elements as they come.
 	//
 	// This function is expected to exhaust
@@ -56,6 +43,20 @@ type delimited[T source.Spanner] struct {
 	// start is called until we see a token that returns true for it. However,
 	// if stop is not nil and it returns true for that token, parsing stops.
 	start, stop func(token.Token) bool
+
+	// Permitted delimiters. If empty, assumed to be keyword.Comma.
+	delims []keyword.Keyword
+
+	// What are we parsing, and within what context? This is used for
+	// generating diagnostics.
+	what, in taxa.Noun
+
+	// Whether a delimiter must be present, rather than merely optional.
+	required bool
+	// Whether iteration should expect to exhaust c.
+	exhaust bool
+	// Whether trailing delimiters are permitted.
+	trailing bool
 }
 
 func (d delimited[T]) appendTo(commas ast.Commas[T]) {

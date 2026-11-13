@@ -30,7 +30,6 @@ var _ FileDeclNode = (*NoSourceNode)(nil)
 // FileNode is the root of the AST hierarchy. It represents an entire
 // protobuf source file.
 type FileNode struct {
-	compositeNode
 	fileInfo *FileInfo
 
 	// A file has either a Syntax or Edition node, never both.
@@ -39,10 +38,11 @@ type FileNode struct {
 	Syntax  *SyntaxNode
 	Edition *EditionNode
 
-	Decls []FileElement
-
 	// This synthetic node allows access to final comments and whitespace
 	EOF *RuneNode
+	compositeNode
+
+	Decls []FileElement
 }
 
 // NewFileNode creates a new *FileNode. The syntax parameter is optional. If it
@@ -169,11 +169,11 @@ var _ FileElement = (*EmptyDeclNode)(nil)
 //
 // Files that don't have a syntax node are assumed to use proto2 syntax.
 type SyntaxNode struct {
-	compositeNode
+	Syntax    StringValueNode
 	Keyword   *KeywordNode
 	Equals    *RuneNode
-	Syntax    StringValueNode
 	Semicolon *RuneNode
+	compositeNode
 }
 
 // NewSyntaxNode creates a new *SyntaxNode. All four arguments must be non-nil:
@@ -216,11 +216,11 @@ func NewSyntaxNode(keyword *KeywordNode, equals *RuneNode, syntax StringValueNod
 // Files may include either an edition node or a syntax node, but not both.
 // If neither are present, the file is assumed to use proto2 syntax.
 type EditionNode struct {
-	compositeNode
+	Edition   StringValueNode
 	Keyword   *KeywordNode
 	Equals    *RuneNode
-	Edition   StringValueNode
 	Semicolon *RuneNode
+	compositeNode
 }
 
 // NewEditionNode creates a new *EditionNode. All four arguments must be non-nil:
@@ -257,7 +257,7 @@ func NewEditionNode(keyword *KeywordNode, equals *RuneNode, edition StringValueN
 //
 //	import "google/protobuf/empty.proto";
 type ImportNode struct {
-	compositeNode
+	Name    StringValueNode
 	Keyword *KeywordNode
 	// Optional; if present indicates this is a public import
 	//
@@ -271,8 +271,8 @@ type ImportNode struct {
 	// If public the Public field will also be populated for backwards compatibility.
 	// If weak the Weak field will also be populated for backward compatibility.
 	Modifier  *KeywordNode
-	Name      StringValueNode
 	Semicolon *RuneNode
+	compositeNode
 }
 
 // NewImportNode creates a new *ImportNode. The public and weak arguments are optional
@@ -356,10 +356,10 @@ func (*ImportNode) fileElement() {}
 //
 //	package foobar.com;
 type PackageNode struct {
-	compositeNode
-	Keyword   *KeywordNode
 	Name      IdentValueNode
+	Keyword   *KeywordNode
 	Semicolon *RuneNode
+	compositeNode
 }
 
 func (*PackageNode) fileElement() {}

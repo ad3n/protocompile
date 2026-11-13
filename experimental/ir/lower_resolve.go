@@ -266,14 +266,15 @@ func resolveMethodTypes(m Method, r *report.Report) {
 
 // symbolRef is all of the information necessary to resolve a symbol reference.
 type symbolRef struct {
+	span source.Spanner
+
 	*File
 	*report.Report
 
-	scope, name FullName
-	span        source.Spanner
-
 	skipIfNot, accept func(SymbolKind) bool
-	want              taxa.Noun
+
+	scope, name FullName
+	want        taxa.Noun
 
 	// If true, the names of scalars will be resolved as potential symbols.
 	allowScalars bool

@@ -67,8 +67,6 @@ func (k Kind) String() string {
 // compact-options bracket on a field or enum value (e.g. adding
 // `[deprecated = true]`) is not yet supported.
 type Edit struct {
-	// Kind selects the operation.
-	Kind Kind
 
 	// Target serves a different role depending on Kind:
 	//   - KindAdd:    the container to insert into. Zero means
@@ -76,6 +74,15 @@ type Edit struct {
 	//   - KindDelete: the decl to remove.
 	//   - KindMove:   the decl to relocate.
 	Target ast.DeclAny
+
+	// Before is the destination anchor for positional inserts:
+	//   - KindAdd:  when non-zero, Insertions are placed immediately
+	//               before Before in Target's decl list (in the order
+	//               given). Before must be a current member of Target.
+	//               When zero, Insertions are appended (default).
+	//   - KindMove: the moved decl is reinserted immediately before
+	//               Before. Required.
+	Before ast.DeclAny
 
 	// Insertions are the decls to append to Target's body, in order.
 	// Honored only by [KindAdd].
@@ -90,14 +97,8 @@ type Edit struct {
 	//   - oneof, extend, group: message body
 	Insertions []ast.DeclAny
 
-	// Before is the destination anchor for positional inserts:
-	//   - KindAdd:  when non-zero, Insertions are placed immediately
-	//               before Before in Target's decl list (in the order
-	//               given). Before must be a current member of Target.
-	//               When zero, Insertions are appended (default).
-	//   - KindMove: the moved decl is reinserted immediately before
-	//               Before. Required.
-	Before ast.DeclAny
+	// Kind selects the operation.
+	Kind Kind
 }
 
 // ApplyEdits applies edits to file in order, stopping at the first

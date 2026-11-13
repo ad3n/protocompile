@@ -39,21 +39,22 @@ const unknownFilePath = "<unknown file>"
 type Symbols struct {
 	pkgTrie packageSymbols
 
+	extDecls map[protoreflect.FullName]extDecl
+
 	// We don't know the packages for these symbols, so we can't
 	// keep them in the pkgTrie. In vast majority of cases, this
 	// will always be empty/unused. When used, it ensures that
 	// multiple extension declarations don't refer to the same
 	// extension.
 	extDeclsMu sync.Mutex
-	extDecls   map[protoreflect.FullName]extDecl
 }
 
 type packageSymbols struct {
-	mu       sync.RWMutex
 	children map[protoreflect.FullName]*packageSymbols
 	files    map[protoreflect.FileDescriptor]struct{}
 	symbols  map[protoreflect.FullName]symbolEntry
 	exts     map[extNumber]ast.SourceSpan
+	mu       sync.RWMutex
 }
 
 type extNumber struct {

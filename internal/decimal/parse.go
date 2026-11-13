@@ -233,8 +233,8 @@ mant:
 
 // parseError is returned by [Parse] on failure.
 type parseError struct {
-	message string
 	err     error
+	message string
 }
 
 func (p *parseError) Error() string {

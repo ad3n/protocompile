@@ -22,8 +22,8 @@ import "time"
 // A zero Stopwatch is ready to use. Methods on Stopwatch must not be called
 // concurrently.
 type Stopwatch struct {
-	elapsed time.Duration
 	start   time.Time
+	elapsed time.Duration
 }
 
 // Time returns the time elapsed since the first call to [Stopwatch.Start].

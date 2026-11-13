@@ -41,8 +41,8 @@ import (
 type TypeGeneric id.Node[TypeGeneric, *File, *rawTypeGeneric]
 
 type rawTypeGeneric struct {
-	path PathID
 	args rawTypeList
+	path PathID
 }
 
 // TypeGenericArgs is the arguments for [Context.NewTypeGeneric].
@@ -122,8 +122,8 @@ var (
 )
 
 type rawTypeList struct {
-	brackets token.ID
 	args     []withComma[id.Dyn[TypeAny, TypeKind]]
+	brackets token.ID
 }
 
 // Brackets returns the token tree for the brackets wrapping the argument list.

@@ -43,23 +43,24 @@ var (
 // Values of type Task are passed to [Query]. The main use of a Task is to
 // be passed to [Resolve] to resolve dependencies.
 type Task struct {
+	stopwatch timex.Stopwatch
+
 	// We need all of the contexts for a call to [Run] to be the same, so to
 	// avoid user implementations of Query making this mistake (or inserting
 	// inappropriate timeouts), we pass the context as part of the task context.
 	ctx    context.Context //nolint:containedctx
 	cancel func(error)
 
-	exec      *Executor
-	task      *task
-	result    *result
-	runID     uint64
-	stopwatch timex.Stopwatch
+	exec   *Executor
+	task   *task
+	result *result
 
 	timer *timer
 
 	// Counts goroutines spawned on behalf of this task's Run, so that Run
 	// does not return while any of them are still executing.
-	wg *sync.WaitGroup
+	wg    *sync.WaitGroup
+	runID uint64
 	// Set if we're currently holding the executor's semaphore. This exists to
 	// ensure that we do not violate concurrency assumptions, and is never
 	// itself mutated concurrently.
@@ -70,8 +71,8 @@ type Task struct {
 }
 
 type timer struct {
-	mu sync.Mutex
 	m  map[any]time.Duration
+	mu sync.Mutex
 }
 
 func (t *timer) record(key any, time time.Duration) {
@@ -408,6 +409,7 @@ type Result[T any] struct {
 
 // result is a Result[any] with a completion channel appended to it.
 type result struct {
+	done chan struct{}
 	Result[any]
 
 	// This is the sequence ID of the Run call that caused this result to be
@@ -425,7 +427,6 @@ type result struct {
 	// Note that runID itself does not require synchronization, because loads of
 	// runID are synchronized-after the done channel being closed.
 	runID uint64
-	done  chan struct{}
 }
 
 // start executes a query in the context of some task and records the result by

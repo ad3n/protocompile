@@ -31,9 +31,10 @@ import (
 type Session struct {
 	intern intern.Table
 
-	once             sync.Once
-	builtins         builtinIDs
 	optionalBuiltins map[intern.ID]struct{}
+	builtins         builtinIDs
+
+	once sync.Once
 }
 
 // RecordInternStats enables instrumentation of the session's intern table.

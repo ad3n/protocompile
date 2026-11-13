@@ -25,14 +25,14 @@ import "fmt"
 //	local enum LocalEnum { ... }
 //	export enum ExportedEnum { ... }
 type EnumNode struct {
-	compositeNode
 	// Optional; if present indicates visibility modifier (export/local) for edition 2024
 	Visibility *KeywordNode
 	Keyword    *KeywordNode
 	Name       *IdentNode
 	OpenBrace  *RuneNode
-	Decls      []EnumElement
 	CloseBrace *RuneNode
+	compositeNode
+	Decls []EnumElement
 }
 
 func (*EnumNode) fileElement() {}
@@ -143,12 +143,12 @@ var _ EnumValueDeclNode = (*NoSourceNode)(nil)
 //
 //	UNSET = 0 [deprecated = true];
 type EnumValueNode struct {
-	compositeNode
+	Number    IntValueNode
 	Name      *IdentNode
 	Equals    *RuneNode
-	Number    IntValueNode
 	Options   *CompactOptionsNode
 	Semicolon *RuneNode
+	compositeNode
 }
 
 func (*EnumValueNode) enumElement() {}

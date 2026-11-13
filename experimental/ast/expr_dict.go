@@ -33,8 +33,8 @@ import (
 type ExprDict id.Node[ExprDict, *File, *rawExprDict]
 
 type rawExprDict struct {
-	braces token.ID
 	fields []withComma[id.ID[ExprField]]
+	braces token.ID
 }
 
 // AsAny type-erases this expression value.

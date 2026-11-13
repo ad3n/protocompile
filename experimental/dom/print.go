@@ -25,15 +25,16 @@ import (
 
 // printer holds state for converting a laid-out [dom] into a string.
 type printer struct {
-	Options
-
 	out strings.Builder
-	// Buffered spaces and newlines, for whitespace merging in write().
-	spaces, newlines int
 
 	// Indentation state. See indentBy() for usage.
 	indent  []byte
 	indents []string
+
+	Options
+
+	// Buffered spaces and newlines, for whitespace merging in write().
+	spaces, newlines int
 
 	// Whether a value has been popped from indent. This is used to handle the
 	// relatively rare case where indentBy is called inside of unindentBy.

@@ -43,9 +43,9 @@ import (
 //
 // This type is intended for making options comparable, such as for use in queries.
 type Options struct {
+	exclude                      Excluder
 	includeSourceCodeInfo        bool
 	generateExtraOptionLocations bool
-	exclude                      Excluder
 }
 
 type generator struct {

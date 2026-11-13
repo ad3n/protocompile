@@ -52,9 +52,9 @@ type rawFeature struct {
 }
 
 type rawFeatureInfo struct {
+	deprecationWarning, removalErr  string
 	defaults                        []featureDefault // Sorted by edition.
 	introduced, deprecated, removed syntax.Syntax
-	deprecationWarning, removalErr  string
 }
 
 type featureDefault struct {

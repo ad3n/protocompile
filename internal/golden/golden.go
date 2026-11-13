@@ -189,15 +189,15 @@ func (c Corpus) Run(t *testing.T, test func(t *testing.T, path, text string, out
 
 // Output represents the output of a test case.
 type Output struct {
+
+	// The comparison function for this output. If nil, defaults to
+	// [CompareAndDiff].
+	Compare CompareFunc
 	// The extension of the output. This is a suffix to the name of the
 	// testcase's main file; so if Corpus.Extension is "proto", and this is
 	// "stderr", for a test "foo.proto" the test runner will look for files
 	// named "foo.proto.stderr".
 	Extension string
-
-	// The comparison function for this output. If nil, defaults to
-	// [CompareAndDiff].
-	Compare CompareFunc
 }
 
 // CompareFunc is a comparison function between strings, used in [Output].

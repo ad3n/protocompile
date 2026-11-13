@@ -405,20 +405,22 @@ type optionRef struct {
 	*File
 	*report.Report
 
-	scope FullName
-	def   ast.Option
+	raw *id.ID[Value]
+
+	def ast.Option
 
 	field Member
-	raw   *id.ID[Value]
+
+	// A member being annotated. This is used for pseudo-option resolution.
+	target Member
+
+	scope FullName
 
 	// fieldFQN is the interned FQN of the *Options builtin field that field
 	// resolves to. It is set even when field is zero (because the vendored
 	// descriptor.proto does not declare it), so the diagnostic emitted on the
 	// zero-field path can name the missing symbol.
 	fieldFQN intern.ID
-
-	// A member being annotated. This is used for pseudo-option resolution.
-	target Member
 }
 
 // resolve performs symbol resolution.

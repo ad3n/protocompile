@@ -71,9 +71,9 @@ var _ StringValueNode = (*CompoundStringLiteralNode)(nil)
 //
 //	"proto2"
 type StringLiteralNode struct {
-	terminalNode
 	// Val is the actual string value that the literal indicates.
 	Val string
+	terminalNode
 }
 
 // NewStringLiteralNode creates a new *StringLiteralNode with the given val.
@@ -97,8 +97,8 @@ func (n *StringLiteralNode) AsString() string {
 //
 //	"this "  "is"   " all one "   "string"
 type CompoundStringLiteralNode struct {
-	compositeNode
 	Val string
+	compositeNode
 }
 
 // NewCompoundLiteralStringNode creates a new *CompoundStringLiteralNode that
@@ -191,10 +191,10 @@ func (n *UintLiteralNode) AsFloat() float64 {
 
 // NegativeIntLiteralNode represents an integer literal with a negative (-) sign.
 type NegativeIntLiteralNode struct {
-	compositeNode
 	Minus *RuneNode
 	Uint  *UintLiteralNode
-	Val   int64
+	compositeNode
+	Val int64
 }
 
 // NewNegativeIntLiteralNode creates a new *NegativeIntLiteralNode. Both
@@ -301,10 +301,10 @@ func (n *SpecialFloatLiteralNode) AsFloat() float64 {
 
 // SignedFloatLiteralNode represents a signed floating point number.
 type SignedFloatLiteralNode struct {
-	compositeNode
-	Sign  *RuneNode
 	Float FloatValueNode
-	Val   float64
+	Sign  *RuneNode
+	compositeNode
+	Val float64
 }
 
 // NewSignedFloatLiteralNode creates a new *SignedFloatLiteralNode. Both
@@ -344,15 +344,15 @@ func (n *SignedFloatLiteralNode) AsFloat() float64 {
 //
 //	["foo", "bar", "baz"]
 type ArrayLiteralNode struct {
+	OpenBracket  *RuneNode
+	CloseBracket *RuneNode
 	compositeNode
-	OpenBracket *RuneNode
-	Elements    []ValueNode
+	Elements []ValueNode
 	// Commas represent the separating ',' characters between elements. The
 	// length of this slice must be exactly len(Elements)-1, with each item
 	// in Elements having a corresponding item in this slice *except the last*
 	// (since a trailing comma is not allowed).
-	Commas       []*RuneNode
-	CloseBracket *RuneNode
+	Commas []*RuneNode
 }
 
 // NewArrayLiteralNode creates a new *ArrayLiteralNode. The openBracket and
@@ -410,16 +410,16 @@ func (n *ArrayLiteralNode) Value() any {
 //
 //	{ foo:1 foo:2 foo:3 bar:<name:"abc" id:123> }
 type MessageLiteralNode struct {
+	Open  *RuneNode // should be '{' or '<'
+	Close *RuneNode // should be '}' or '>', depending on Open
 	compositeNode
-	Open     *RuneNode // should be '{' or '<'
 	Elements []*MessageFieldNode
 	// Separator characters between elements, which can be either ','
 	// or ';' if present. This slice must be exactly len(Elements) in
 	// length, with each item in Elements having one corresponding item
 	// in Seps. Separators in message literals are optional, so a given
 	// item in this slice may be nil to indicate absence of a separator.
-	Seps  []*RuneNode
-	Close *RuneNode // should be '}' or '>', depending on Open
+	Seps []*RuneNode
 }
 
 // NewMessageLiteralNode creates a new *MessageLiteralNode. The openSym and
@@ -478,14 +478,14 @@ func (n *MessageLiteralNode) Value() any {
 //
 //	foo:"bar"
 type MessageFieldNode struct {
-	compositeNode
+	Val  ValueNode
 	Name *FieldReferenceNode
 	// Sep represents the ':' separator between the name and value. If
 	// the value is a message or list literal (and thus starts with '<',
 	// '{', or '['), then the separator may be omitted and this field may
 	// be nil.
 	Sep *RuneNode
-	Val ValueNode
+	compositeNode
 }
 
 // NewMessageFieldNode creates a new *MessageFieldNode. All args except sep

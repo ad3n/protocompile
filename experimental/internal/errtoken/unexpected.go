@@ -31,26 +31,29 @@ type Unexpected struct {
 	// The unexpected thing (may be a token or AST node).
 	What source.Spanner
 
-	// The context we're in. Should be format-able with %v.
-	Where taxa.Place
 	// Useful when where is an "after" position: if non-nil, this will be
 	// highlighted as "previous where.Object is here"
 	Prev source.Spanner
 
+	Got any
+
+	Stream *token.Stream
+
+	// The context we're in. Should be format-able with %v.
+	Where taxa.Place
+
+	// If nonempty, inserting this text will be suggested at the given offset.
+	Insert string
+
 	// What we wanted vs. what we got. Got can be used to customize what gets
 	// shown, but if it's not set, we call describe(what) to get a user-visible
 	// description.
-	Want taxa.Set
+	Want          taxa.Set
+	InsertAt      int
+	InsertJustify just.Kind
 	// If set and want is empty, the snippet will repeat the "unexpected foo"
 	// text under the snippet.
 	RepeatUnexpected bool
-	Got              any
-
-	// If nonempty, inserting this text will be suggested at the given offset.
-	Insert        string
-	InsertAt      int
-	InsertJustify just.Kind
-	Stream        *token.Stream
 }
 
 // UnexpectedEOF is a helper for constructing EOF diagnostics that need to

@@ -58,10 +58,10 @@ func ToProto(f *ast.File, options ToProtoOptions) proto.Message {
 
 // protoEncoder is the state needed for converting an AST node into a Protobuf message.
 type protoEncoder struct {
-	ToProtoOptions
-
-	stack    []source.Spanner
 	stackMap map[source.Spanner]struct{}
+
+	stack []source.Spanner
+	ToProtoOptions
 }
 
 // checkCycle panics if v is visited cyclically.

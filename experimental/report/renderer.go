@@ -60,7 +60,6 @@ type Renderer struct {
 // renderer contains shared state for a rendering operation, allowing e.g.
 // allocations to be re-used and simplifying function signatures.
 type renderer struct {
-	Renderer
 	writer
 
 	ss styleSheet
@@ -68,6 +67,7 @@ type renderer struct {
 	// The width, in columns, of the line number margin in the diagnostic
 	// currently being rendered.
 	margin int
+	Renderer
 }
 
 // Render renders a diagnostic report.
@@ -344,14 +344,14 @@ const maxMultilinesPerWindow = 8
 // consisting of multiple spans in the same file.
 type window struct {
 	file *source.File
-	// The line number at which the text starts in the overall source file.
-	start int
-	// The byte offset range this window's text occupies in the containing
-	// source File.
-	offsets [2]int
 	// A list of all underline elements in this window.
 	underlines []underline
 	multilines []multiline
+	// The byte offset range this window's text occupies in the containing
+	// source File.
+	offsets [2]int
+	// The line number at which the text starts in the overall source file.
+	start int
 }
 
 // buildWindow builds a diagnostic window for the given snippets, which must all have
@@ -1054,11 +1054,11 @@ func (r *renderer) window(w *window) (needsTrailingBreak bool) {
 }
 
 type underline struct {
+	message    string
 	line       int
 	start, end int
-	level      Level
-	message    string
 	subline    int
+	level      Level
 }
 
 func (u underline) Len() int {
@@ -1066,10 +1066,10 @@ func (u underline) Len() int {
 }
 
 type multiline struct {
+	message              string
 	start, end           int
 	startWidth, endWidth int
 	level                Level
-	message              string
 }
 
 func (r *renderer) sidebar(bars, lineno, slashAt int, multis []*multiline) string {

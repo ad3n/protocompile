@@ -30,8 +30,8 @@ type BlockArgs struct {
 }
 
 type rawBlock struct {
-	braces token.ID
 	tags   id.DynSeq[Expr, Kind, *Context]
+	braces token.ID
 }
 
 // AsAny type-erases this type value.

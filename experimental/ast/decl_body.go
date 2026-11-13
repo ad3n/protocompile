@@ -48,13 +48,13 @@ type HasBody interface {
 }
 
 type rawDeclBody struct {
-	braces token.ID
 
 	// These slices are co-indexed; they are parallelizes to save
 	// three bytes per decl (declKind is 1 byte, but decl is 4; if
 	// they're stored in AOS format, we waste 3 bytes of padding).
-	kinds []DeclKind
-	ptrs  []id.ID[DeclAny]
+	kinds  []DeclKind
+	ptrs   []id.ID[DeclAny]
+	braces token.ID
 }
 
 // AsAny type-erases this declaration value.

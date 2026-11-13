@@ -22,8 +22,8 @@ import (
 )
 
 type parseIntResult struct {
-	small        uint64
 	big          *big.Int
+	small        uint64
 	hasThousands bool
 }
 

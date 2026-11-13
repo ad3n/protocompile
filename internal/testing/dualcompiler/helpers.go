@@ -34,12 +34,12 @@ const (
 
 // SkipConfig controls which compilers to skip for a particular test.
 type SkipConfig struct {
+	// SkipReason is the reason for skipping (used in t.Skip message).
+	SkipReason string
 	// SkipOld causes the old compiler to be skipped.
 	SkipOld bool
 	// SkipNew causes the new compiler to be skipped.
 	SkipNew bool
-	// SkipReason is the reason for skipping (used in t.Skip message).
-	SkipReason string
 }
 
 // RunWithBothCompilers runs the given test function with both the old and new compilers.

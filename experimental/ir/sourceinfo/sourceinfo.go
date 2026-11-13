@@ -31,11 +31,10 @@ import (
 
 // Location is a decoded location within a SourceCodeInfo message.
 type Location struct {
-	Path       Path
-	Start, End Position
-
 	Leading, Trailing string
+	Path              Path
 	Detached          []string
+	Start, End        Position
 }
 
 // Decode decodes all of the source locations within a FileDescriptorProto.
@@ -106,16 +105,17 @@ type Path []Component
 //
 //nolint:govet // Field alignment doesn't matter for this.
 type Component struct {
-	Number int32  // The field number od the message.
-	Name   string // The name of the field. Empty if not known.
-
-	Repeated bool // Whether this is a repeated field.
-	Index    int  // If this is a repeated, the index within it.
+	Name string // The name of the field. Empty if not known.
 
 	// For fields which correspond to an entity with a name, such
 	// FileDescriptorProto.message or DescriptorProto.field, this is that
 	// entity's name.
 	IndexName string
+	Index     int // If this is a repeated, the index within it.
+
+	Number int32 // The field number od the message.
+
+	Repeated bool // Whether this is a repeated field.
 }
 
 // Decode decodes a SourceCodeInfo path.

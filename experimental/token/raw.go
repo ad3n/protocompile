@@ -196,14 +196,14 @@ func fuseImpl(diff int32, open, close *nat) {
 
 // synth is the data of a synth token stored in a [Context].
 type synth struct {
-	text string
-	kind Kind
+	text     string
+	children []ID
 
 	// Non-zero if this token has a matching other end. Whether this is
 	// the opener or the closer is determined by whether children is
 	// nil: it is nil for the closer.
 	otherEnd ID
-	children []ID
+	kind     Kind
 }
 
 // Keyword returns the keyword for this token, if it is an identifier.

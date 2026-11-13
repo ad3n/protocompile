@@ -43,6 +43,13 @@ type OptionIndex map[*ast.OptionNode]*OptionSourceInfo
 // OptionSourceInfo describes the source info path for an option value and
 // contains information about the value's descendants in the AST.
 type OptionSourceInfo struct {
+	// Children can be an *ArrayLiteralSourceInfo, a *MessageLiteralSourceInfo,
+	// or nil, depending on whether the option's value is an
+	// [*ast.ArrayLiteralNode], an [*ast.MessageLiteralNode], or neither.
+	// For [*ast.ArrayLiteralNode] values, this is only populated if the
+	// value is a non-empty array of messages. (Empty arrays and arrays
+	// of scalar values do not need any additional info.)
+	Children OptionChildrenSourceInfo
 	// The source info path to this element. If this element represents a
 	// declaration with an array-literal value, the last element of the
 	// path is the index of the first item in the array.
@@ -56,13 +63,6 @@ type OptionSourceInfo struct {
 	// the descriptor, which is a parent of the options message (since that
 	// is how the pseudo-options are actually stored).
 	Path []int32
-	// Children can be an *ArrayLiteralSourceInfo, a *MessageLiteralSourceInfo,
-	// or nil, depending on whether the option's value is an
-	// [*ast.ArrayLiteralNode], an [*ast.MessageLiteralNode], or neither.
-	// For [*ast.ArrayLiteralNode] values, this is only populated if the
-	// value is a non-empty array of messages. (Empty arrays and arrays
-	// of scalar values do not need any additional info.)
-	Children OptionChildrenSourceInfo
 }
 
 // OptionChildrenSourceInfo represents source info paths for child elements of

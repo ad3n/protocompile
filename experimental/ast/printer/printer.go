@@ -132,19 +132,15 @@ func fileDeclIndex(file *ast.File, decl ast.DeclAny) (int, bool) {
 
 // printer tracks state for printing AST nodes with fidelity.
 type printer struct {
-	options Options
-	trivia  *triviaIndex
-	pending []token.Token
-	push    dom.Sink
+	trivia *triviaIndex
+	push   dom.Sink
 
 	// indent is the cached indentation string applied by [printer.withIndent],
 	// computed once from [Formatting.TabstopWidth] at construction time to avoid
 	// re-allocating on every nested scope.
 	indent string
 
-	// ctx stores expected formatting behaviours based on the scope of the
-	// printed entity.
-	ctx context
+	pending []token.Token
 
 	// declSourceIdx maps a sorted-iteration index to the original
 	// source-order index for the file's top-level decls. Set during
@@ -153,6 +149,11 @@ type printer struct {
 	// Consulted by [printer.declGap] to look up the right
 	// [detachedTrivia.hasBlankBefore] entry.
 	declSourceIdx []int
+	options       Options
+
+	// ctx stores expected formatting behaviours based on the scope of the
+	// printed entity.
+	ctx context
 }
 
 // newPrinter constructs a printer for the given options, trivia index,

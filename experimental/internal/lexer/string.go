@@ -115,10 +115,10 @@ func lexString(l *lexer, sigil string) {
 }
 
 type stringContent struct {
-	rune rune
+	escape source.Span
+	rune   rune
 
 	isRawByte bool
-	escape    source.Span
 }
 
 // lexStringContent lexes a single logical rune's worth of content for a quoted

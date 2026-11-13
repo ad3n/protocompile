@@ -31,8 +31,8 @@ import (
 type CompactOptions id.Node[CompactOptions, *File, *rawCompactOptions]
 
 type rawCompactOptions struct {
-	brackets token.ID
 	options  []withComma[rawOption]
+	brackets token.ID
 }
 
 // Option is a key-value pair inside of a [CompactOptions] or a [DefOption].

@@ -31,8 +31,8 @@ import (
 // routine to avoid printing trailing whitespace to the output.
 type writer struct {
 	out io.Writer
-	buf []byte // Never contains a '\n' byte.
 	err error
+	buf []byte // Never contains a '\n' byte.
 }
 
 // Write implements [io.Writer].

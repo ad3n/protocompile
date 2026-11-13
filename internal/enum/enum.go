@@ -69,15 +69,15 @@ func (e *Enum) Init() {
 }
 
 type Value struct {
-	Name    string   `yaml:"name"`   // The name of the value.
-	Alias   string   `yaml:"alias"`  // Another value this value aliases, if any.
-	String_ string   `yaml:"string"` // The string representation of this value.
-	Docs_   string   `yaml:"docs"`   // Documentation for the value.
-	From    []string `yaml:"from"`   // Names for use in from-string instead of String_.
-	Expr    string   `yaml:"expr"`   // The Go expression to use for this value.
+	Parent  *Enum  `yaml:"-"`
+	Name    string `yaml:"name"`   // The name of the value.
+	Alias   string `yaml:"alias"`  // Another value this value aliases, if any.
+	String_ string `yaml:"string"` // The string representation of this value.
+	Docs_   string `yaml:"docs"`   // Documentation for the value.
+	Expr    string `yaml:"expr"`   // The Go expression to use for this value.
 
-	Parent *Enum `yaml:"-"`
-	Idx    int   `yaml:"-"`
+	From []string `yaml:"from"` // Names for use in from-string instead of String_.
+	Idx  int      `yaml:"-"`
 }
 
 func (v Value) HasSuffixDocs() bool {
@@ -103,12 +103,12 @@ func (v Value) Docs() string {
 }
 
 type Method struct {
-	Kind  MethodKind `yaml:"kind"` // The kind of method to generate.
-	Name_ string     `yaml:"name"` // The method's name; optional for some methods.
-	Docs_ string     `yaml:"docs"` // Documentation for the method.
-	Skip  []string   `yaml:"skip"` // Enum values to ignore in this method.
+	Parent *Enum      `yaml:"-"`
+	Kind   MethodKind `yaml:"kind"` // The kind of method to generate.
+	Name_  string     `yaml:"name"` // The method's name; optional for some methods.
+	Docs_  string     `yaml:"docs"` // Documentation for the method.
+	Skip   []string   `yaml:"skip"` // Enum values to ignore in this method.
 
-	Parent *Enum `yaml:"-"`
 }
 
 func (m Method) Name() (string, error) {

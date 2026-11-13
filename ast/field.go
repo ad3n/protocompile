@@ -49,8 +49,6 @@ var _ FieldDeclNode = (*NoSourceNode)(nil)
 //
 //	optional string foo = 1;
 type FieldNode struct {
-	compositeNode
-	Label     FieldLabel
 	FldType   IdentValueNode
 	Name      *IdentNode
 	Equals    *RuneNode
@@ -61,6 +59,8 @@ type FieldNode struct {
 	// This is an up-link to the containing *ExtendNode for fields
 	// that are defined inside of "extend" blocks.
 	Extendee *ExtendNode
+	Label    FieldLabel
+	compositeNode
 }
 
 func (*FieldNode) msgElement()    {}
@@ -217,18 +217,19 @@ func (f *FieldLabel) IsPresent() bool {
 //	  optional string name = 2;
 //	}
 type GroupNode struct {
-	compositeNode
-	Label   FieldLabel
+	MessageBody
+
 	Keyword *KeywordNode
 	Name    *IdentNode
 	Equals  *RuneNode
 	Tag     *UintLiteralNode
 	Options *CompactOptionsNode
-	MessageBody
 
 	// This is an up-link to the containing *ExtendNode for groups
 	// that are defined inside of "extend" blocks.
 	Extendee *ExtendNode
+	Label    FieldLabel
+	compositeNode
 }
 
 func (*GroupNode) msgElement()    {}
@@ -405,12 +406,12 @@ var _ OneofDeclNode = (*NoSourceNode)(nil)
 //	  Labels by_label = 5;
 //	}
 type OneofNode struct {
-	compositeNode
 	Keyword    *KeywordNode
 	Name       *IdentNode
 	OpenBrace  *RuneNode
-	Decls      []OneofElement
 	CloseBrace *RuneNode
+	compositeNode
+	Decls []OneofElement
 }
 
 func (*OneofNode) msgElement() {}
@@ -535,13 +536,13 @@ func (n *SyntheticOneof) RangeOptions(_ func(*OptionNode) bool) {
 //
 //	map<string, Values>
 type MapTypeNode struct {
-	compositeNode
+	ValueType  IdentValueNode
 	Keyword    *KeywordNode
 	OpenAngle  *RuneNode
 	KeyType    *IdentNode
 	Comma      *RuneNode
-	ValueType  IdentValueNode
 	CloseAngle *RuneNode
+	compositeNode
 }
 
 // NewMapTypeNode creates a new *MapTypeNode. All arguments must be non-nil.
@@ -588,13 +589,13 @@ func NewMapTypeNode(keyword *KeywordNode, openAngle *RuneNode, keyType *IdentNod
 //
 //	map<string,string> replacements = 3 [deprecated = true];
 type MapFieldNode struct {
-	compositeNode
 	MapType   *MapTypeNode
 	Name      *IdentNode
 	Equals    *RuneNode
 	Tag       *UintLiteralNode
 	Options   *CompactOptionsNode
 	Semicolon *RuneNode
+	compositeNode
 }
 
 func (*MapFieldNode) msgElement() {}

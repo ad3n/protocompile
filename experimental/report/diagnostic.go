@@ -48,11 +48,6 @@ const (
 type Diagnostic struct {
 	tag, message string
 
-	level Level
-
-	// sortOrder is used to force diagnostics to sort before or after each other
-	// in groups. See [Report.Sort].
-	sortOrder int
 	// The file this diagnostic occurs in, if it has no associated Annotations. This
 	// is used for errors like "file too big" that cannot be given a snippet.
 	inFile string
@@ -60,23 +55,29 @@ type Diagnostic struct {
 	// A list of annotated source code spans in the diagnostic.
 	snippets           []snippet
 	notes, help, debug []string
+
+	// sortOrder is used to force diagnostics to sort before or after each other
+	// in groups. See [Report.Sort].
+	sortOrder int
+
+	level Level
 }
 
 // Edit is an edit to suggest on a snippet.
 //
 // See [SuggestEdits].
 type Edit struct {
+
+	// Text to replace the content between Start and End with.
+	//
+	// A pure deletion is modeled by Replace == "".
+	Replace string
 	// The start and end offsets of the edit, relative the span of the snippet
 	// this edit is applied to (so, Start == 0 means the edit starts at the
 	// start of the span).
 	//
 	// An insertion without deletion is modeled by Start == End.
 	Start, End int
-
-	// Text to replace the content between Start and End with.
-	//
-	// A pure deletion is modeled by Replace == "".
-	Replace string
 }
 
 // IsDeletion returns whether this edit involves deleting part of the source
@@ -291,8 +292,6 @@ var PageBreak pageBreak
 // around the annotated region. More literally, this is e.g. a red squiggly
 // line under some code.
 type snippet struct {
-	// The span for this annotation.
-	source.Span
 
 	// A message to show under this snippet.
 	//
@@ -302,6 +301,15 @@ type snippet struct {
 	// is no additional context that would be useful to add to the error.
 	message string
 
+	// The span for this annotation.
+	source.Span
+
+	// Edits to include in this snippet. This causes this snippet to be rendered
+	// in its own window when it is non-empty, and no underline will appear for
+	// the overall span of the snippet. The message will still be used, as the
+	// title of the window.
+	edits []Edit
+
 	// Whether this is a "primary" snippet, which is used for deciding whether or not
 	// to mark the snippet with the same color as the overall diagnostic.
 	primary bool
@@ -310,12 +318,6 @@ type snippet struct {
 	// rendered together with following snippets, even if they're in the same
 	// file.
 	pageBreak bool
-
-	// Edits to include in this snippet. This causes this snippet to be rendered
-	// in its own window when it is non-empty, and no underline will appear for
-	// the overall span of the snippet. The message will still be used, as the
-	// title of the window.
-	edits []Edit
 }
 
 func (a snippet) apply(d *Diagnostic) {

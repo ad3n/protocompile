@@ -35,11 +35,11 @@ import (
 
 // ToYAMLOptions contains configuration for [ToYAML].
 type ToYAMLOptions struct {
-	// The maximum column width before wrapping starts to occur.
-	MaxWidth int
 
 	// The indentation string to use. If empty, defaults to "  ".
 	Indent string
+	// The maximum column width before wrapping starts to occur.
+	MaxWidth int
 }
 
 // ToYAML converts a Protobuf message or Go struct into a YAML document in a

@@ -16,13 +16,12 @@ package report
 
 // styleSheet is the colors used for pretty-rendering diagnostics.
 type styleSheet struct {
-	r Renderer
-
 	reset string
 	// Normal colors.
 	nError, nWarning, nRemark, nAccent, nAdd, nDelete string
 	// Bold colors.
 	bError, bWarning, bRemark, bAccent, bAdd, bDelete string
+	r                                                 Renderer
 }
 
 func newStyleSheet(r Renderer) styleSheet {

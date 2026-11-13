@@ -48,13 +48,14 @@ import (
 type DeclDef id.Node[DeclDef, *File, *rawDeclDef]
 
 type rawDeclDef struct {
-	ty   id.Dyn[TypeAny, TypeKind] // Not present for enum fields.
-	name PathID
-
 	signature *rawSignature
 
+	ty    id.Dyn[TypeAny, TypeKind] // Not present for enum fields.
+	value id.Dyn[ExprAny, ExprKind]
+
+	name PathID
+
 	equals token.ID
-	value  id.Dyn[ExprAny, ExprKind]
 
 	options id.ID[CompactOptions]
 	body    id.ID[DeclBody]

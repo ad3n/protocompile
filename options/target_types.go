@@ -32,9 +32,9 @@ type elementType[OptsStruct any, Opts optionsType[OptsStruct]] interface {
 }
 
 type targetType[Elem elementType[OptsStruct, Opts], OptsStruct any, Opts optionsType[OptsStruct]] struct {
-	t                       descriptorpb.FieldOptions_OptionTargetType
 	setUninterpretedOptions func(opts Opts, uninterpreted []*descriptorpb.UninterpretedOption)
 	setOptions              func(elem Elem, opts Opts)
+	t                       descriptorpb.FieldOptions_OptionTargetType
 }
 
 var (

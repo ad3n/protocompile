@@ -25,12 +25,12 @@ import (
 )
 
 type layout struct {
-	Options
+	prevText *tag
 
 	indent []int
-	column int
+	Options
 
-	prevText *tag
+	column int
 }
 
 func (l *layout) layout(doc dom) {

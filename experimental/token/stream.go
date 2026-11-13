@@ -43,10 +43,6 @@ type Stream struct {
 	// The file this stream is over.
 	*source.File
 
-	// Storage for tokens.
-	nats   []nat
-	synths []synth
-
 	// This contains materialized literals for some tokens.
 	//
 	// Not all literal tokens will have an entry here; only those that have
@@ -59,6 +55,10 @@ type Stream struct {
 	// quoted strings) do not generate entries in this map and thus do not
 	// contribute at-rest memory usage.
 	meta map[ID]any
+
+	// Storage for tokens.
+	nats   []nat
+	synths []synth
 
 	// If true, no further mutations (except for synthetic tokens) are
 	// permitted.

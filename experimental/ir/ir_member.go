@@ -519,10 +519,10 @@ type Extend id.Node[Extend, *File, *rawExtend]
 // Rather than each field carrying a reference to its extends block's AST, we
 // have a level of indirection to amortize symbol lookups.
 type rawExtend struct {
-	def     id.ID[ast.DeclDef]
-	ty      Ref[Type]
-	parent  id.ID[Type]
 	members []id.ID[Member]
+	ty      Ref[Type]
+	def     id.ID[ast.DeclDef]
+	parent  id.ID[Type]
 }
 
 // AST returns the declaration for this extend block, if known.
@@ -585,11 +585,11 @@ func (e Extend) Extensions() seq.Indexer[Member] {
 type Oneof id.Node[Oneof, *File, *rawOneof]
 
 type rawOneof struct {
+	members   []id.ID[Member]
 	def       id.ID[ast.DeclDef]
 	fqn, name intern.ID
 	index     uint32
 	container id.ID[Type]
-	members   []id.ID[Member]
 	options   id.ID[Value]
 	features  id.ID[FeatureSet]
 }

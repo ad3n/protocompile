@@ -106,10 +106,12 @@ type lexer struct {
 	*token.Stream
 	*report.Report
 
+	scratchDec *decimal.Decimal
+
+	braces  []token.ID
+	scratch []byte
+
 	cursor, count int
-	braces        []token.ID
-	scratch       []byte
-	scratchDec    *decimal.Decimal
 
 	// Used for determining longest runs of unrecognized tokens.
 	badBytes int

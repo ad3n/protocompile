@@ -24,9 +24,10 @@ import (
 type Meta interface{ meta() }
 
 type Number struct {
+	Big *decimal.Decimal
+
 	// Inlined storage for small int/float values.
 	Word uint64
-	Big  *decimal.Decimal
 
 	// Length of a prefix or suffix on this integer.
 	// The prefix is the base prefix; the suffix is any identifier
@@ -46,14 +47,14 @@ type String struct {
 	// Post-processed string contents.
 	Text string
 
+	// Spans at which escapes occur.
+	Escapes []Escape
+
 	// Lengths of the sigil and quotes for this string
 	Prefix, Quote uint32
 
 	// Whether concatenation took place.
 	Concatenated bool
-
-	// Spans at which escapes occur.
-	Escapes []Escape
 }
 
 type Escape struct {

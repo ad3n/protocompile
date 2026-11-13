@@ -35,7 +35,6 @@ import (
 type File struct {
 	path, text string
 
-	once sync.Once
 	// A prefix sum of the line lengths of text. Given a byte offset, it is possible
 	// to recover which line that offset is on by performing a binary search on this
 	// list.
@@ -43,6 +42,8 @@ type File struct {
 	// Alternatively, this slice can be interpreted as the index after each \n in the
 	// original file.
 	lineIndex []int
+
+	once sync.Once
 }
 
 // NewFile constructs a new source file.

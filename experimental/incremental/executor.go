@@ -34,8 +34,7 @@ import (
 //
 // See [New], [Run], and [Invalidate].
 type Executor struct {
-	reportOptions report.Options
-	dirty         sync.RWMutex
+	sema *semaphore.Weighted
 
 	// TODO: Evaluate alternatives. sync.Map is pretty bad at having predictable
 	// performance, and we may want to add eviction to keep memoization costs
@@ -43,13 +42,14 @@ type Executor struct {
 	// See https://github.com/dgraph-io/ristretto as a potential alternative.
 	tasks sync.Map // [any, *task]
 
-	sema *semaphore.Weighted
+	reportOptions report.Options
 
 	// The [time.Duration] to wait before running the GC when debug mode is on. See docs for
 	// [WithDebugEvict].
 	evictGCDeadline time.Duration
 
 	counter atomic.Uint64 // Used for generating sequence IDs for Result.Unchanged.
+	dirty   sync.RWMutex
 }
 
 // ExecutorOption is an option func for [New].

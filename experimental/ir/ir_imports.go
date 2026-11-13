@@ -28,13 +28,14 @@ import (
 type Import struct {
 	*File // The file that is imported.
 
+	Decl ast.DeclImport // The import declaration.
+
 	// The kind of import this is.
 	Public, Weak, Option bool
 
-	Direct  bool           // Whether this is a direct or transitive import.
-	Visible bool           // Whether this import's symbols are visible in the current file.
-	Used    bool           // Whether this import has been marked as used.
-	Decl    ast.DeclImport // The import declaration.
+	Direct  bool // Whether this is a direct or transitive import.
+	Visible bool // Whether this import's symbols are visible in the current file.
+	Used    bool // Whether this import has been marked as used.
 }
 
 // imports is a data structure for compactly classifying the transitive imports
@@ -52,6 +53,15 @@ type Import struct {
 // tables will include all symbols from a and b, because b is a direct import,
 // and a is a transitive public import of a direct import.
 type imports struct {
+
+	// Maps the path of each file to its index in files. This is used for
+	// mapping from one [Context]'s file IDs to another's.
+	byPath intern.Map[uint32]
+
+	// Map of path of each imported file to a direct import which causes it to
+	// be imported. This is used for marking which imports are used.
+	causes intern.Map[uint32]
+
 	// All transitively-imported files and their AST definition. This slice is divided
 	// into the following segments:
 	//
@@ -66,14 +76,6 @@ type imports struct {
 	// The last element of this slice is always descriptor.proto, even if it
 	// exists elsewhere as an ordinary import.
 	files []imported
-
-	// Maps the path of each file to its index in files. This is used for
-	// mapping from one [Context]'s file IDs to another's.
-	byPath intern.Map[uint32]
-
-	// Map of path of each imported file to a direct import which causes it to
-	// be imported. This is used for marking which imports are used.
-	causes intern.Map[uint32]
 
 	// The transitive public segment exists because public-ness has to be
 	// propagated to files that are not directly imported at all. Consider the

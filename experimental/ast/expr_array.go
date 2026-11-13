@@ -29,8 +29,8 @@ import (
 type ExprArray id.Node[ExprArray, *File, *rawExprArray]
 
 type rawExprArray struct {
-	brackets token.ID
 	args     []withComma[id.Dyn[ExprAny, ExprKind]]
+	brackets token.ID
 }
 
 // AsAny type-erases this expression value.

@@ -67,20 +67,21 @@ type evaluator struct {
 
 //nolint:govet // vet complains about 8 wasted padding bytes.
 type evalArgs struct {
-	expr ast.ExprAny // The expression to evaluate.
+
+	// A span for whatever caused the above field to be selected.
+	annotation source.Spanner
 
 	// The location to write the parsed expression into. If zero, a new value
 	// will be allocated.
-	target     Value
-	field      Member
+	target Value
+	field  Member
+	expr   ast.ExprAny // The expression to evaluate.
+
 	optionPath ast.Path
 
 	rawField       Ref[Member]
 	isConcreteAny  bool
 	isArrayElement bool
-
-	// A span for whatever caused the above field to be selected.
-	annotation source.Spanner
 
 	textFormat   bool         // Whether we're inside of a message literal.
 	allowMax     bool         // Whether the max keyword is to be honored.
@@ -1251,10 +1252,10 @@ func (e errTypeConstraint) Diagnose(d *report.Diagnostic) {
 // errLiteralRange is like [errTypeCheck], but is specifically about integer
 // ranges.
 type errLiteralRange struct {
+	got any
 	errTypeCheck
-	got    any
-	signed bool
 	bits   int
+	signed bool
 }
 
 func (e errLiteralRange) Diagnose(d *report.Diagnostic) {

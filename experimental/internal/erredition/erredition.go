@@ -52,14 +52,15 @@ func (e TooOld) Diagnose(d *report.Diagnostic) {
 
 // TooNew diagnoses an edition that is too new for the feature used.
 type TooNew struct {
-	Current syntax.Syntax
-	Decl    ast.DeclSyntax
-
-	Deprecated, Removed             syntax.Syntax
-	DeprecatedReason, RemovedReason string
-
 	What  any
 	Where source.Spanner
+	Decl  ast.DeclSyntax
+
+	DeprecatedReason, RemovedReason string
+
+	Current syntax.Syntax
+
+	Deprecated, Removed syntax.Syntax
 }
 
 // Diagnose implements [report.Diagnoser].

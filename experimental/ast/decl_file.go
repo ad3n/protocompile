@@ -263,19 +263,19 @@ func (d DeclPackage) Span() source.Span {
 type DeclImport id.Node[DeclImport, *File, *rawDeclImport]
 
 type rawDeclImport struct {
-	keyword, semi token.ID
 	modifiers     []token.ID
 	importPath    id.Dyn[ExprAny, ExprKind]
+	keyword, semi token.ID
 	options       id.ID[CompactOptions]
 }
 
 // DeclImportArgs is arguments for [Context.NewDeclImport].
 type DeclImportArgs struct {
-	Keyword    token.Token
-	Modifiers  []token.Token
-	ImportPath ExprAny
 	Options    CompactOptions
+	Keyword    token.Token
+	ImportPath ExprAny
 	Semicolon  token.Token
+	Modifiers  []token.Token
 }
 
 // AsAny type-erases this declaration value.

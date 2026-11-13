@@ -28,10 +28,10 @@ type Service id.Node[Service, *File, *rawService]
 type Method id.Node[Method, *File, *rawMethod]
 
 type rawService struct {
+	methods   []id.ID[Method]
 	def       id.ID[ast.DeclDef]
 	fqn, name intern.ID
 
-	methods  []id.ID[Method]
 	options  id.ID[Value]
 	features id.ID[FeatureSet]
 }

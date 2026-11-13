@@ -37,44 +37,6 @@ type File struct {
 	session *Session
 	ast     *ast.File
 
-	// The path for this file. This need not be what ast.Span() reports, because
-	// it has been passed through filepath.Clean() and filepath.ToSlash() first,
-	// to normalize it.
-	path intern.ID
-
-	syntax syntax.Syntax
-	pkg    intern.ID
-
-	imports imports
-
-	types            []id.ID[Type]
-	topLevelTypesEnd int // Index of the last top-level type in types.
-
-	extns            []id.ID[Member]
-	topLevelExtnsEnd int // Index of the last top-level extension in extns.
-
-	extends            []id.ID[Extend]
-	topLevelExtendsEnd int // Index of last top-level extension in extends.
-
-	options  id.ID[Value]
-	services []id.ID[Service]
-	features id.ID[FeatureSet]
-
-	// Table of all symbols transitively imported by this file. This is all
-	// local symbols plus the imported tables of all direct imports. Importing
-	// everything and checking visibility later allows us to diagnose
-	// missing import errors.
-
-	// This file's symbol tables. Each file has two symbol tables: its imported
-	// symbols and its exported symbols.
-	//
-	// The exported symbols are formed from the file's local symbols, and the
-	// exported symbols of each transitive public import.
-	//
-	// The imported symbols are the exported symbols plus the exported symbols
-	// of each direct import.
-	exported, imported symtab
-
 	dpBuiltins *builtins // Only non-nil for descriptor.proto.
 
 	arenas struct {
@@ -94,6 +56,47 @@ type File struct {
 
 		symbols arena.Arena[rawSymbol]
 	}
+
+	imports imports
+
+	types []id.ID[Type]
+
+	extns []id.ID[Member]
+
+	extends  []id.ID[Extend]
+	services []id.ID[Service]
+	// This file's symbol tables. Each file has two symbol tables: its imported
+	// symbols and its exported symbols.
+	//
+	// The exported symbols are formed from the file's local symbols, and the
+	// exported symbols of each transitive public import.
+	//
+	// The imported symbols are the exported symbols plus the exported symbols
+	// of each direct import.
+	exported, imported symtab
+
+	topLevelTypesEnd int // Index of the last top-level type in types.
+
+	topLevelExtnsEnd int // Index of the last top-level extension in extns.
+
+	topLevelExtendsEnd int // Index of last top-level extension in extends.
+
+	// The path for this file. This need not be what ast.Span() reports, because
+	// it has been passed through filepath.Clean() and filepath.ToSlash() first,
+	// to normalize it.
+	path intern.ID
+
+	syntax syntax.Syntax
+	pkg    intern.ID
+
+	options  id.ID[Value]
+	features id.ID[FeatureSet]
+
+	// Table of all symbols transitively imported by this file. This is all
+	// local symbols plus the imported tables of all direct imports. Importing
+	// everything and checking visibility later allows us to diagnose
+	// missing import errors.
+
 }
 
 type withContext = id.HasContext[*File]

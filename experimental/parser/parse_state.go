@@ -48,9 +48,9 @@ type classified struct {
 type punctParser struct {
 	*parser
 	c      *token.Cursor
-	want   keyword.Keyword
 	where  taxa.Place
 	insert just.Kind
+	want   keyword.Keyword
 }
 
 // parse attempts to unconditionally parse some punctuation.

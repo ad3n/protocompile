@@ -558,8 +558,8 @@ func (v Value) suggestEdit(path, expr string, format string, args ...any) report
 // type provides uniform access to such elements. See [Value.Elements].
 type Element struct {
 	withContext
-	index int
 	value Value
+	index int
 	bits  rawValueBits
 }
 

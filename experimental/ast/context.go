@@ -38,16 +38,16 @@ import (
 type File struct {
 	_      unsafex.NoCopy
 	stream *token.Stream
-	path   string
-
-	decls   decls
-	types   types
-	exprs   exprs
-	options arena.Arena[rawCompactOptions]
 
 	// A cache of raw paths that have been converted into parenthesized
 	// components in NewExtensionComponent.
 	extnPathCache map[PathID]token.ID
+	path          string
+
+	decls   decls
+	exprs   exprs
+	types   types
+	options arena.Arena[rawCompactOptions]
 }
 
 type withContext = id.HasContext[*File]

@@ -74,9 +74,9 @@ func (id ID) GoString() string {
 //
 // The zero value of Table is empty and ready to use.
 type Table struct {
+	stats atomic.Pointer[stats]
 	index sync.Map // [string, atomic.Int32]
 	table syncx.Log[string]
-	stats atomic.Pointer[stats]
 }
 
 // Stats are cache behavior statistics for a [Table].

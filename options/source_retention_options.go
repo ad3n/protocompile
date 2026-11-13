@@ -108,8 +108,8 @@ func (p sourcePath) push(element int32) sourcePath {
 }
 
 type sourcePathTrie struct {
-	removed  bool
 	children map[int32]*sourcePathTrie
+	removed  bool
 }
 
 func (t *sourcePathTrie) addPath(p sourcePath) {

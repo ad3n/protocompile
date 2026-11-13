@@ -585,9 +585,9 @@ func validateField(res *result, syntax protoreflect.Syntax, name protoreflect.Fu
 }
 
 type tagRange struct {
+	node  ast.RangeDeclNode
 	start int32
 	end   int32
-	node  ast.RangeDeclNode
 }
 
 type tagRanges []tagRange

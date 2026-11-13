@@ -24,10 +24,11 @@ import (
 
 // MeasuringTape measures how much memory a particular value used.
 type MeasuringTape struct {
+	visited map[[2]uintptr]struct{}
+
 	// Which memory regions have already been measured. This allows us to
 	// detect cycles in a robust manner.
-	heap    interval.Intersect[uintptr, struct{}]
-	visited map[[2]uintptr]struct{}
+	heap interval.Intersect[uintptr, struct{}]
 
 	// Extra memory that we cannot get an actual pointer to.
 	extra uint64

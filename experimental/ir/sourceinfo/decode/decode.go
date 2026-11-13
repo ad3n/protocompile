@@ -72,10 +72,10 @@ func main() {
 		}
 
 		type loc struct {
-			Path              string
-			Start, End        sourceinfo.Position
 			Leading, Trailing *string // Pointer so that if not present it doesn't get printed.
+			Path              string
 			Detached          []string
+			Start, End        sourceinfo.Position
 		}
 		info := make(map[string][]loc)
 		for _, fdp := range files {

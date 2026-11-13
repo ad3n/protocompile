@@ -114,11 +114,6 @@ func (f CompositeResolver) FindFileByPath(path string) (SearchResult, error) {
 // an optional list of import paths to search. By default, it searches the
 // file system.
 type SourceResolver struct {
-	// Optional list of import paths. If present and not empty, then all
-	// file paths to find are assumed to be relative to one of these paths.
-	// If nil or empty, all file paths to find are assumed to be relative to
-	// the current working directory.
-	ImportPaths []string
 	// Optional function for returning a file's contents. If nil, then
 	// os.Open is used to open files on the file system.
 	//
@@ -126,6 +121,11 @@ type SourceResolver struct {
 	// could result in concurrent invocations of this function from
 	// multiple goroutines.
 	Accessor func(path string) (io.ReadCloser, error)
+	// Optional list of import paths. If present and not empty, then all
+	// file paths to find are assumed to be relative to one of these paths.
+	// If nil or empty, all file paths to find are assumed to be relative to
+	// the current working directory.
+	ImportPaths []string
 }
 
 var _ Resolver = (*SourceResolver)(nil)

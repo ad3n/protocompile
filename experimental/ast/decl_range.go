@@ -31,8 +31,8 @@ import (
 type DeclRange id.Node[DeclRange, *File, *rawDeclRange]
 
 type rawDeclRange struct {
-	keyword token.ID
 	args    []withComma[id.Dyn[ExprAny, ExprKind]]
+	keyword token.ID
 	options id.ID[CompactOptions]
 	semi    token.ID
 }

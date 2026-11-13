@@ -56,9 +56,8 @@ func ToProto(e expr.Expr, options ToProtoOptions) *exprpb.Expr {
 
 // protoEncoder is the state needed for converting an AST node into a Protobuf message.
 type protoEncoder struct {
-	ToProtoOptions
-
 	stackMap map[source.Spanner]struct{}
+	ToProtoOptions
 }
 
 // checkCycle panics if v is visited cyclically.

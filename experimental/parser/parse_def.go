@@ -31,15 +31,15 @@ type defParser struct {
 	*parser
 	c *token.Cursor
 
-	kw token.Token
-	in taxa.Noun
-
 	args ast.DeclDefArgs
+
+	kw token.Token
 
 	inputs, outputs token.Token
 	braces          token.Token
 
 	outputTy ast.TypeAny // Used only for diagnostics.
+	in       taxa.Noun
 }
 
 type defFollower interface {

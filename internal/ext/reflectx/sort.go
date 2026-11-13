@@ -92,8 +92,8 @@ func Sort(v reflect.Value) (ok bool) {
 }
 
 type sorter struct {
-	v    reflect.Value
 	swap func(i, j int)
+	v    reflect.Value
 }
 
 var _ sort.Interface = sorter{}

@@ -30,11 +30,12 @@ import (
 type debug struct {
 	file *ir.File
 
-	path  []int32
 	proto *descriptorpb.SourceCodeInfo
 	extns *descriptorv1.SourceCodeInfoExtension
 
 	commentTracker *commentTracker
+
+	path []int32
 
 	suppressed bool
 }

@@ -23,8 +23,7 @@ import (
 // Unmatched diagnoses a delimiter for which we found one half of a matched
 // delimiter but not the other.
 type Unmatched struct {
-	Span    source.Span // The offending delimiter.
-	Keyword keyword.Keyword
+	Span source.Span // The offending delimiter.
 
 	// If present, this indicates that we did match with another brace delimiter, but it
 	// was of the wrong kind
@@ -32,6 +31,7 @@ type Unmatched struct {
 
 	// If present, this is a brace delimiter we think we *should* have matched.
 	ShouldMatch source.Span
+	Keyword     keyword.Keyword
 }
 
 // Diagnose implements [report.Diagnose].

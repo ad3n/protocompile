@@ -47,12 +47,12 @@ var _ MessageDeclNode = (*NoSourceNode)(nil)
 //	local message LocalMessage { ... }
 //	export message ExportedMessage { ... }
 type MessageNode struct {
-	compositeNode
+	MessageBody
 	// Optional; if present indicates visibility modifier ("export" or "local") for edition 2024
 	Visibility *KeywordNode
 	Keyword    *KeywordNode
 	Name       *IdentNode
-	MessageBody
+	compositeNode
 }
 
 func (*MessageNode) fileElement() {}
@@ -132,8 +132,8 @@ func (n *MessageNode) RangeOptions(fn func(*OptionNode) bool) {
 // MessageNodes and GroupNodes.
 type MessageBody struct {
 	OpenBrace  *RuneNode
-	Decls      []MessageElement
 	CloseBrace *RuneNode
+	Decls      []MessageElement
 }
 
 func populateMessageBody(m *MessageBody, openBrace *RuneNode, decls []MessageElement, closeBrace *RuneNode) {
@@ -176,12 +176,12 @@ var _ MessageElement = (*EmptyDeclNode)(nil)
 //	  bool redacted = 33333;
 //	}
 type ExtendNode struct {
-	compositeNode
-	Keyword    *KeywordNode
 	Extendee   IdentValueNode
+	Keyword    *KeywordNode
 	OpenBrace  *RuneNode
-	Decls      []ExtendElement
 	CloseBrace *RuneNode
+	compositeNode
+	Decls []ExtendElement
 }
 
 func (*ExtendNode) fileElement() {}

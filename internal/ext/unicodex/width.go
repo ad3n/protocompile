@@ -46,6 +46,10 @@ func NonPrint(r rune) bool {
 // Width is used for calculating the approximate width of a string in terminal
 // columns.
 type Width struct {
+
+	// If non-nil, text will be output to this function, converting tabs to
+	// spaces and escaping unprintables as requested.
+	Out io.StringWriter
 	// The column at which the text is being rendered. This is necessary for
 	// tabstop calculations.
 	Column int
@@ -56,10 +60,6 @@ type Width struct {
 
 	// If set, non-printable characters are escaped in the format <U+NNNN>.
 	EscapeNonPrint bool
-
-	// If non-nil, text will be output to this function, converting tabs to
-	// spaces and escaping unprintables as requested.
-	Out io.StringWriter
 }
 
 // WriteString writes the given text, advancing w.Column and writing to w.Out.
