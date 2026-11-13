@@ -32,12 +32,10 @@ import (
 const maxStringBufferCapacity = 64 << 10
 
 type runeReader struct {
-	data []byte
-	pos  int
-	err  error
-	mark int
-	// Enable this check to make input required to be valid UTF-8.
-	// For now, since protoc allows invalid UTF-8, default to false.
+	err        error
+	data       []byte
+	pos        int
+	mark       int
 	utf8Strict bool
 }
 
@@ -84,21 +82,22 @@ type comment struct {
 }
 
 type protoLex struct {
-	stringBuf bytes.Buffer
+	prevSym ast.TerminalNode
 
 	input   *runeReader
 	info    *ast.FileInfo
 	handler *reporter.Handler
 	res     *ast.FileNode
 
-	prevSym    ast.TerminalNode
+	comments  []comment
+	stringBuf bytes.Buffer
+
 	prevOffset int
 	eof        ast.Token
 
 	prevLine, curLine int
 
 	maybeDonateComment int
-	comments           []comment
 }
 
 var utf8Bom = []byte{0xEF, 0xBB, 0xBF}

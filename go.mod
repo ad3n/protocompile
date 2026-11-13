@@ -1,6 +1,6 @@
 module github.com/ad3n/protocompile
 
-go 1.27.3
+go 1.27.4
 
 require (
 	buf.build/gen/go/bufbuild/protodescriptor/protocolbuffers/go v1.36.12-20250109164928-1da0de137947.1

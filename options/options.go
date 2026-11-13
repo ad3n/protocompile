@@ -54,14 +54,13 @@ type interpreter struct {
 	resolver                linker.Resolver
 	overrideDescriptorProto linker.File
 
-	index      sourceinfo.OptionIndex
+	index sourceinfo.OptionIndex
+
+	reporter   *reporter.Handler
 	pathBuffer []int32
 
-	reporter *reporter.Handler
-	lenient  bool
+	lenient bool
 
-	// lenienceEnabled is set to true when errors reported to reporter
-	// should be lenient
 	lenienceEnabled    bool
 	lenientErrReported bool
 }

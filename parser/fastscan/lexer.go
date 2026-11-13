@@ -152,15 +152,11 @@ func (rr *runeReader) unreadRune(r rune) {
 }
 
 type lexer struct {
-	input *runeReader
-	// start of the next rune in the input
-	curLine, curCol int
-	// start of the previously read full token
+	input                       *runeReader
+	scratch                     []byte
+	strBuf                      bytes.Buffer
+	curLine, curCol             int
 	prevTokenLine, prevTokenCol int
-	// reused across calls to readIdentifier and readNumber; tokens are ASCII.
-	scratch []byte
-	// reused across calls to readStringLiteral.
-	strBuf bytes.Buffer
 }
 
 var utf8Bom = []byte{0xEF, 0xBB, 0xBF}

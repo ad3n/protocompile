@@ -16,11 +16,15 @@ package linker
 
 import "google.golang.org/protobuf/types/descriptorpb"
 
-// allocPool helps allocate descriptor instances. Instead of allocating
-// them one at a time, we allocate a pool -- a large, flat slice to hold
-// all descriptors of a particular kind for a file. We then use capacity
-// in the pool when we need space for individual descriptors.
 type allocPool struct {
+	messages      []msgDescriptor
+	fields        []fldDescriptor
+	oneofs        []oneofDescriptor
+	enums         []enumDescriptor
+	enumVals      []enValDescriptor
+	extensions    []extTypeDescriptor
+	services      []svcDescriptor
+	methods       []mtdDescriptor
 	numMessages   int
 	numFields     int
 	numOneofs     int
@@ -29,15 +33,6 @@ type allocPool struct {
 	numExtensions int
 	numServices   int
 	numMethods    int
-
-	messages   []msgDescriptor
-	fields     []fldDescriptor
-	oneofs     []oneofDescriptor
-	enums      []enumDescriptor
-	enumVals   []enValDescriptor
-	extensions []extTypeDescriptor
-	services   []svcDescriptor
-	methods    []mtdDescriptor
 }
 
 func newAllocPool(file *descriptorpb.FileDescriptorProto) *allocPool {

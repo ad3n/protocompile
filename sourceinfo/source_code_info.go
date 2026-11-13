@@ -644,10 +644,10 @@ func generateSourceCodeInfoForMethod(opts OptionIndex, sci *sourceCodeInfo, n *a
 
 type sourceCodeInfo struct {
 	file            *ast.FileNode
+	commentsUsed    map[ast.SourcePos]struct{}
+	locs            []*descriptorpb.SourceCodeInfo_Location
 	extraComments   bool
 	extraOptionLocs bool
-	locs            []*descriptorpb.SourceCodeInfo_Location
-	commentsUsed    map[ast.SourcePos]struct{}
 }
 
 func (sci *sourceCodeInfo) newLocWithoutComments(n ast.Node, path []int32) {
@@ -759,8 +759,8 @@ type comments interface {
 }
 
 type subComments struct {
-	offs, n int
 	c       ast.Comments
+	offs, n int
 }
 
 func (s subComments) Len() int {
