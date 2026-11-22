@@ -95,8 +95,6 @@ func (d *debug) maybeComments(s source.Spanner, comments bool, path ...int32) {
 	d.maybeCommentsAt(s, s, comments, path...)
 }
 
-// maybeCommentsAt is like [debug.maybeComments], but records at as the
-// location's span. Comments are still attributed using s.
 func (d *debug) maybeCommentsAt(s, at source.Spanner, comments bool, path ...int32) {
 	if d == nil || d.suppressed {
 		return
@@ -107,11 +105,9 @@ func (d *debug) maybeCommentsAt(s, at source.Spanner, comments bool, path ...int
 		return
 	}
 
-	loc := new(descriptorpb.SourceCodeInfo_Location)
+	loc := newSourceLocation(source.GetSpan(at), d.path, path)
 	d.proto.Location = append(d.proto.Location, loc)
 
-	loc.Span = locationSpan(source.GetSpan(at))
-	loc.Path = append(slices.Clone(d.path), path...)
 	if !comments {
 		return
 	}
@@ -124,13 +120,13 @@ func (d *debug) maybeCommentsAt(s, at source.Spanner, comments bool, path ...int
 		if leadingComment := leading.leadingComment(); leadingComment != "" {
 			loc.LeadingComments = addr(leadingComment)
 		}
+
 		if detachedComments := leading.detachedComments(); len(detachedComments) > 0 {
 			loc.LeadingDetachedComments = detachedComments
 		}
 	}
 
 	end, _ := stream.Around(span.End)
-	// Check the start of a fused token.
 	end, _ = end.StartEnd()
 	trailing := d.commentTracker.attributed[end.ID()]
 	if trailing != nil {
@@ -147,8 +143,6 @@ func (d *debug) extensions(do func(*descriptorv1.SourceCodeInfoExtension)) {
 	}
 }
 
-// done writes the result of recording SourceCodeInfo to out and resets this
-// builder.
 func (d *debug) done(out **descriptorpb.SourceCodeInfo) {
 	if d == nil {
 		return
@@ -161,9 +155,7 @@ func (d *debug) done(out **descriptorpb.SourceCodeInfo) {
 	slices.SortStableFunc(d.proto.Location, func(a, b *descriptorpb.SourceCodeInfo_Location) int {
 		return slices.Compare(a.Span, b.Span)
 	})
-	d.proto.Location = slices.Insert(d.proto.Location, 0, &descriptorpb.SourceCodeInfo_Location{
-		Span: locationSpan(d.file.AST().Span()),
-	})
+	d.proto.Location = slices.Insert(d.proto.Location, 0, newSourceLocation(d.file.AST().Span(), nil, nil))
 
 	*out = d.proto
 	*d = debug{}
@@ -182,25 +174,31 @@ func (d *debug) suppress() func() {
 	return func() { d.suppressed = prev }
 }
 
-// locationSpan is a helper function for returning the [descriptorpb.SourceCodeInfo_Location]
-// span for the given [source.Span].
-//
-// The span for [descriptorpb.SourceCodeInfo_Location] always has exactly three or four:
-// start line, start column, end line (optional, otherwise assumed same as start line),
-// and end column. The line and column numbers are zero-based.
-func locationSpan(span source.Span) []int32 {
+func newSourceLocation(span source.Span, prefix, suffix []int32) *descriptorpb.SourceCodeInfo_Location {
 	start, end := span.StartLoc(), span.EndLoc()
-	if start.Line == end.Line {
-		return []int32{
-			int32(start.Line) - 1,
-			int32(start.Column) - 1,
-			int32(end.Column) - 1,
-		}
+	spanLen := 3
+	if start.Line != end.Line {
+		spanLen = 4
 	}
-	return []int32{
-		int32(start.Line) - 1,
-		int32(start.Column) - 1,
-		int32(end.Line) - 1,
-		int32(end.Column) - 1,
+
+	coords := make([]int32, spanLen+len(prefix)+len(suffix))
+	coords[0] = int32(start.Line) - 1
+	coords[1] = int32(start.Column) - 1
+	coords[spanLen-1] = int32(end.Column) - 1
+	if spanLen == 4 {
+		coords[2] = int32(end.Line) - 1
+	}
+
+	path := coords[spanLen:]
+	if len(path) == 0 {
+		path = slices.Clone(prefix)
+	}
+
+	copy(path, prefix)
+	copy(path[len(prefix):], suffix)
+
+	return &descriptorpb.SourceCodeInfo_Location{
+		Span: coords[:spanLen:spanLen],
+		Path: path,
 	}
 }

@@ -18,7 +18,6 @@ import (
 	"reflect"
 
 	"github.com/ad3n/protocompile/internal/ext/bitsx"
-	"github.com/ad3n/protocompile/internal/ext/reflectx"
 	"github.com/ad3n/protocompile/internal/interval"
 )
 
@@ -110,7 +109,7 @@ func (t *MeasuringTape) measure(v reflect.Value) {
 	case reflect.Interface:
 		v := v.Elem()
 		if v.IsValid() {
-			inner := reflectx.UnwrapStruct(v)
+			inner := unwrapStruct(v)
 			switch inner.Kind() {
 			case reflect.Pointer, reflect.Chan, reflect.Map, reflect.Func:
 			default:

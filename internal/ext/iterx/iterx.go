@@ -16,18 +16,9 @@
 package iterx
 
 import (
-	"fmt"
 	"iter"
 	"slices"
 )
-
-// Empty returns whether an iterator yields any elements.
-func Empty[T any](seq iter.Seq[T]) bool {
-	for range seq {
-		return false
-	}
-	return true
-}
 
 // Empty2 returns whether an iterator yields any elements.
 func Empty2[T, U any](seq iter.Seq2[T, U]) bool {
@@ -37,18 +28,6 @@ func Empty2[T, U any](seq iter.Seq2[T, U]) bool {
 	return true
 }
 
-// Take returns an iterator over the first n elements of a sequence.
-func Take[T any](seq iter.Seq[T], n int) iter.Seq[T] {
-	return func(yield func(T) bool) {
-		for v := range seq {
-			if n == 0 || !yield(v) {
-				return
-			}
-			n--
-		}
-	}
-}
-
 // Enumerate adapts an iterator to yield an incrementing index each iteration
 // step.
 func Enumerate[T any](seq iter.Seq[T]) iter.Seq2[int, T] {
@@ -56,16 +35,6 @@ func Enumerate[T any](seq iter.Seq[T]) iter.Seq2[int, T] {
 	return Map1To2(seq, func(v T) (int, T) {
 		i++
 		return i - 1, v
-	})
-}
-
-// Strings maps an iterator with [fmt.Sprint], yielding an iterator of strings.
-func Strings[T any](seq iter.Seq[T]) iter.Seq[string] {
-	return Map(seq, func(v T) string {
-		if s, ok := any(v).(string); ok {
-			return s // Avoid dumb copies.
-		}
-		return fmt.Sprint(v)
 	})
 }
 

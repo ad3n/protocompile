@@ -29,13 +29,6 @@ func DedupKey[S ~[]E, E any, K comparable](
 	return dedup(s, func(a, b E) bool { return key(a) == key(b) }, choose)
 }
 
-// DedupFunc deduplicates consecutive elements in a slice based on the equal function. If
-// equal returns true, then two elements are considered duplicates, and we always pick the
-// first element to keep.
-func DedupFunc[S ~[]E, E any](s S, equal func(E, E) bool) S {
-	return dedup(s, equal, func(e []E) E { return e[0] })
-}
-
 func dedup[S ~[]E, E any](s S, equal func(E, E) bool, choose func([]E) E) S {
 	if len(s) == 0 {
 		return s

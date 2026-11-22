@@ -27,15 +27,6 @@ func First[T any](seq iter.Seq[T]) (v T, ok bool) {
 	return v, ok
 }
 
-// First retrieves the first element a two-element iterator.
-func First2[K, V any](seq iter.Seq2[K, V]) (k K, v V, ok bool) {
-	for k, v = range seq {
-		ok = true
-		break
-	}
-	return k, v, ok
-}
-
 // Last retrieves the last element of an iterator.
 func Last[T any](seq iter.Seq[T]) (v T, ok bool) {
 	for v = range seq {
@@ -95,15 +86,6 @@ func Find2[T, U any](seq iter.Seq2[T, U], p func(T, U) bool) (int, T, U) {
 	return -1, z1, z2
 }
 
-// Index returns the index of the first element of seq that satisfies p.
-//
-// if not found, returns -1.
-func Index[T any](seq iter.Seq[T], p func(T) bool) int {
-	idx, _ := Find(seq, p)
-	return idx
-}
-
-// Index2 is like [Index], but for two-element iterators.
 func Index2[T, U any](seq iter.Seq2[T, U], p func(T, U) bool) int {
 	idx, _, _ := Find2(seq, p)
 	return idx
@@ -112,11 +94,5 @@ func Index2[T, U any](seq iter.Seq2[T, U], p func(T, U) bool) int {
 // Contains whether an element exists that satisfies p.
 func Contains[T any](seq iter.Seq[T], p func(T) bool) bool {
 	idx, _ := Find(seq, p)
-	return idx != -1
-}
-
-// Contains2 is like [Contains], but for two-element iterators.
-func Contains2[T, U any](seq iter.Seq2[T, U], p func(T, U) bool) bool {
-	idx, _, _ := Find2(seq, p)
 	return idx != -1
 }

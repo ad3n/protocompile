@@ -21,7 +21,6 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/ad3n/protocompile/experimental/internal/astx"
 	"github.com/ad3n/protocompile/experimental/report"
 	"github.com/ad3n/protocompile/experimental/source"
 	"github.com/ad3n/protocompile/internal/golden"
@@ -62,7 +61,7 @@ func TestParse(t *testing.T) {
 			t.Fail()
 		}
 
-		proto := astx.ToProto(file, astx.ToProtoOptions{
+		proto := astToProto(file, toProtoOptions{
 			OmitSpans: !strings.Contains(text, preserveSpans),
 			OmitFile:  true,
 		})

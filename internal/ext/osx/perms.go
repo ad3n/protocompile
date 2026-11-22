@@ -21,23 +21,19 @@ package osx
 // The constants are named for the names chmod gives them. U, G, and O mean
 // "user", "group", and "other"; R, W, and X mean "read", "write", "execute".
 const (
-	// User read, write, exec.
+	// User read and write.
 	PermUR = 0o400
 	PermUW = 0o200
-	PermUX = 0o100
 
-	// Group read, write, exec.
+	// Group read and write.
 	PermGR = 0o40
 	PermGW = 0o20
-	PermGX = 0o10
 
-	// World read, write, exec.
+	// World read and write.
 	PermOR = 0o4
 	PermOW = 0o2
-	PermOX = 0o1
 
-	// All read, write, exec.
+	// All read and write.
 	PermAR = PermUR | PermGR | PermOR
 	PermAW = PermUW | PermGW | PermOW
-	PermAX = PermUX | PermGX | PermOX
 )

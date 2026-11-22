@@ -36,7 +36,7 @@ import (
 type Kind int
 
 const (
-	None Kind = iota
+	_ Kind = iota
 	Between
 	Left
 	Right

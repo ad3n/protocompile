@@ -26,15 +26,6 @@ type Stopwatch struct {
 	elapsed time.Duration
 }
 
-// Time returns the time elapsed since the first call to [Stopwatch.Start].
-func (s *Stopwatch) Elapsed() time.Duration {
-	elapsed := s.elapsed
-	if !s.start.IsZero() {
-		elapsed += time.Since(s.start)
-	}
-	return elapsed
-}
-
 // Start sets the stopwatch running.
 //
 // Repeated calls to [Stopwatch.Start] are no-ops.
@@ -53,12 +44,4 @@ func (s *Stopwatch) Stop() time.Duration {
 	}
 	s.start = time.Time{}
 	return s.elapsed
-}
-
-// Reset resets the elapsed time to zero.
-func (s *Stopwatch) Reset() {
-	s.elapsed = 0
-	if !s.start.IsZero() {
-		s.start = time.Now()
-	}
 }

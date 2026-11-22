@@ -126,11 +126,12 @@ func TestSort(t *testing.T) {
 func TestCycle(t *testing.T) {
 	t.Parallel()
 	assert.Panics(t, func() {
-		iterx.Exhaust(toposort.Sort(
+		for range toposort.Sort(
 			[]int{0},
 			func(n int) int { return n },
 			func(_ int) iter.Seq[int] { return iterx.Of(0) },
-		))
+		) {
+		}
 	})
 }
 
@@ -141,7 +142,8 @@ func TestReentrant(t *testing.T) {
 		dag := func(_ int) iter.Seq[int] { return iterx.Of[int]() }
 
 		for range s.Sort([]int{0}, dag) {
-			iterx.Exhaust(s.Sort([]int{0}, dag))
+			for range s.Sort([]int{0}, dag) {
+			}
 		}
 	})
 }

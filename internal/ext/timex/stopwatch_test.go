@@ -43,3 +43,19 @@ func TestStopwatch(t *testing.T) {
 		assert.Equal(t, time.Second, sw.Elapsed())
 	})
 }
+
+func (s *Stopwatch) Elapsed() time.Duration {
+	elapsed := s.elapsed
+	if !s.start.IsZero() {
+		elapsed += time.Since(s.start)
+	}
+
+	return elapsed
+}
+
+func (s *Stopwatch) Reset() {
+	s.elapsed = 0
+	if !s.start.IsZero() {
+		s.start = time.Now()
+	}
+}

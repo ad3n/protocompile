@@ -57,29 +57,6 @@ func FilterMap[T, U any](seq iter.Seq[T], f func(T) (U, bool)) iter.Seq[U] {
 	}
 }
 
-// Map2 returns a new iterator applying f to each element of seq.
-func Map2[T, U, V, W any](seq iter.Seq2[T, U], f func(T, U) (V, W)) iter.Seq2[V, W] {
-	return FilterMap2(seq, func(v1 T, v2 U) (V, W, bool) {
-		x1, x2 := f(v1, v2)
-		return x1, x2, true
-	})
-}
-
-// Filter2 returns a new iterator that only includes values satisfying p.
-func Filter2[T, U any](seq iter.Seq2[T, U], p func(T, U) bool) iter.Seq2[T, U] {
-	return FilterMap2(seq, func(v1 T, v2 U) (T, U, bool) { return v1, v2, p(v1, v2) })
-}
-
-// FilterMap2 combines the operations of [Map] and [Filter].
-func FilterMap2[T, U, V, W any](seq iter.Seq2[T, U], f func(T, U) (V, W, bool)) iter.Seq2[V, W] {
-	return func(yield func(V, W) bool) {
-		seq(func(v1 T, v2 U) bool {
-			x1, x2, ok := f(v1, v2)
-			return !ok || yield(x1, x2)
-		})
-	}
-}
-
 // Map2to1 is like [Map], but it also acts a Y pipe for converting a two-element
 // iterator into a one-element iterator.
 func Map2to1[T, U, V any](seq iter.Seq2[T, U], f func(T, U) V) iter.Seq[V] {

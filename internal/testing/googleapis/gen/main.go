@@ -31,8 +31,8 @@ import (
 	"runtime/debug"
 	"time"
 
-	"github.com/ad3n/protocompile/internal/ext/bitsx"
 	"github.com/ad3n/protocompile/internal/ext/flagx"
+	"github.com/ad3n/protocompile/internal/testing/memory"
 )
 
 func main() {
@@ -93,7 +93,7 @@ func main() {
 		}
 
 		fmt.Printf("googleapis: downloaded commit %v (%v, compressed to %v, %0.3f%%) in %v\n",
-			commit, bitsx.ByteSize(total), bitsx.ByteSize(stat.Size()), float64(stat.Size())/float64(total)*100, elapsed)
+			commit, memory.ByteSize(total), memory.ByteSize(stat.Size()), float64(stat.Size())/float64(total)*100, elapsed)
 
 		info, ok := debug.ReadBuildInfo()
 		if !ok {

@@ -36,7 +36,6 @@ import (
 
 	"github.com/ad3n/protocompile"
 	"github.com/ad3n/protocompile/ast"
-	"github.com/ad3n/protocompile/internal/ext/bitsx"
 	"github.com/ad3n/protocompile/internal/protoc"
 	"github.com/ad3n/protocompile/internal/testing/googleapis"
 	"github.com/ad3n/protocompile/internal/testing/memory"
@@ -463,10 +462,10 @@ func measure(t *testing.T, v any) {
 	runtime.GC()
 	var m runtime.MemStats
 	runtime.ReadMemStats(&m)
-	t.Logf("(heap used: %v)", bitsx.ByteSize(m.Alloc))
+	t.Logf("(heap used: %v)", memory.ByteSize(m.Alloc))
 
 	// and then try to directly measure just the given value
 	mt := new(memory.MeasuringTape)
 	mt.Measure(v)
-	t.Logf("memory used: %v", bitsx.ByteSize(mt.Usage()))
+	t.Logf("memory used: %v", memory.ByteSize(mt.Usage()))
 }

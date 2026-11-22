@@ -12,15 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package reflectx_test
+package memory
 
 import (
 	"reflect"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-
-	"github.com/ad3n/protocompile/internal/ext/reflectx"
 )
 
 func TestUnwrap(t *testing.T) {
@@ -71,7 +69,7 @@ func TestUnwrap(t *testing.T) {
 			t.Parallel()
 
 			v := reflect.New(tt.have).Elem()
-			v = reflectx.UnwrapStruct(v)
+			v = unwrapStruct(v)
 			assert.Equal(t, tt.want, v.Type())
 		})
 	}

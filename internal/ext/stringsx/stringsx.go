@@ -20,11 +20,9 @@ import (
 	"strings"
 	"unicode"
 	"unicode/utf8"
-	"unsafe"
 
 	"github.com/ad3n/protocompile/internal/ext/iterx"
 	"github.com/ad3n/protocompile/internal/ext/slicesx"
-	"github.com/ad3n/protocompile/internal/ext/unsafex"
 )
 
 // Rune returns the rune at the given byte index.
@@ -60,11 +58,6 @@ func PrevRune[I slicesx.SliceIndex](s string, idx I) (rune, bool) {
 		return -1, false
 	}
 	return r, true
-}
-
-// Byte returns the rune at the given index.
-func Byte[I slicesx.SliceIndex](s string, idx I) (byte, bool) {
-	return slicesx.Get(unsafex.BytesAlias[[]byte](s), idx)
 }
 
 // LastLine returns the substring after the last newline (U+000A) rune.
@@ -116,19 +109,6 @@ func Runes(s string) iter.Seq2[int, rune] {
 				return
 			}
 			s = s[n:]
-		}
-	}
-}
-
-// Bytes returns an iterator over the bytes in a string.
-func Bytes(s string) iter.Seq[byte] {
-	return func(yield func(byte) bool) {
-		for i := range len(s) {
-			// Avoid performing a bounds check each loop step.
-			b := *unsafex.Add(unsafe.StringData(s), i)
-			if !yield(b) {
-				return
-			}
 		}
 	}
 }

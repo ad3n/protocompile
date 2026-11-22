@@ -14,8 +14,15 @@
 
 package intern
 
-import "github.com/ad3n/protocompile/internal/ext/syncx"
+import (
+	"github.com/ad3n/protocompile/internal/ext/syncx"
+	"github.com/ad3n/protocompile/internal/ext/unsafex"
+)
 
 func (t *Table) Table() *syncx.Log[string] {
 	return &t.table
+}
+
+func (t *Table) InternBytes(bytes []byte) ID {
+	return t.Intern(unsafex.StringAlias(bytes))
 }

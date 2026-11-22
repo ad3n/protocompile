@@ -53,25 +53,6 @@ func Pointers[S ~[]E, E any](s S) iter.Seq2[int, *E] {
 	}
 }
 
-// PartitionFunc returns an iterator of the largest substrings of s of equal
-// elements.
-//
-// In other words, suppose key is the identity function. Then, the slice
-// [a a a b c c] is yielded as the subslices [a a a], [b], and [c c c].
-//
-// The iterator also yields the index at which each subslice begins.
-//
-// Will never yield an empty slice.
-//
-//nolint:dupword
-func Partition[S ~[]E, E comparable](s S) iter.Seq2[int, S] {
-	return PartitionKey(s, func(e E) E { return e })
-}
-
-// PartitionKey is like [Partition], but instead the subslices are all such
-// that ever element has the same value for key(e).
-//
-// [Partition] is equivalent to PartitionKey with the identity function.
 func PartitionKey[S ~[]E, E any, K comparable](s S, key func(E) K) iter.Seq2[int, S] {
 	return func(yield func(int, S) bool) {
 		var start int
@@ -101,10 +82,6 @@ func PartitionKey[S ~[]E, E any, K comparable](s S, key func(E) K) iter.Seq2[int
 	}
 }
 
-// PartitionFunc is like [Partition], but instead the subslices are split
-// whenever split returns true for adjacent elements.
-//
-// [Partition] is PartitionFunc with != as the splitting function.
 func PartitionFunc[S ~[]E, E any](s S, split func(E, E) bool) iter.Seq2[int, S] {
 	return func(yield func(int, S) bool) {
 		var start int

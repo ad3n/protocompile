@@ -56,7 +56,7 @@ func TestTrie(t *testing.T) {
 			t.Log(trie.Dump())
 
 			for i, key := range test.keys {
-				assert.Equal(t, test.want[i], slices.Collect(iterx.Right(trie.Prefixes(key))), "#%d", i)
+				assert.Equal(t, test.want[i], slices.Collect(iterx.Map2to1(trie.Prefixes(key), func(_ string, value int) int { return value })), "#%d", i)
 			}
 		})
 	}

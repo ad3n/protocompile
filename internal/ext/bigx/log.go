@@ -34,22 +34,6 @@ func Scale2(z, x []big.Word, y uint) []big.Word {
 	return Shl(z, x, y)
 }
 
-// Scale2Fp returns z = x * 2^y.
-func Scale2Fp(z *big.Float, x *big.Float, n int) *big.Float {
-	if z == nil {
-		z = new(big.Float)
-	}
-	if n == 0 {
-		return z.Copy(x)
-	}
-
-	// Unfortunately this seems to be the least painful way to implement
-	// scalbn, despite the fact it aught to be a primitive...
-	pow2 := big.NewFloat(1)
-	pow2.SetMantExp(pow2, n)
-	return z.Mul(x, pow2)
-}
-
 // Scale10 returns z = x * 10^y.
 func Scale10(z, x []big.Word, y uint) []big.Word {
 	zb := new(big.Int).SetBits(z)

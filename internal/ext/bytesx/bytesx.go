@@ -16,14 +16,6 @@ package bytesx
 
 import "github.com/ad3n/protocompile/internal/ext/unicodex"
 
-// MakeASCIILower uppercases every ASCII letter in buf in-place. Works for any
-// UTF-8 string.
-func MakeASCIILower(buf []byte) {
-	for i := range buf {
-		buf[i] = unicodex.ToASCIILower(buf[i])
-	}
-}
-
 // MakeASCIIUpper uppercases every ASCII letter in buf in-place. Works for any
 // UTF-8 string.
 func MakeASCIIUpper(buf []byte) {

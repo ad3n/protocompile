@@ -17,42 +17,10 @@ package slicesx
 import (
 	"cmp"
 	"iter"
-	"slices"
 
 	"github.com/ad3n/protocompile/internal/ext/iterx"
 )
 
-// MergeKey an n-way merge of sorted slices, using a function to extract a
-// comparison key. This function will be called at most once per element.
-// The key extraction function is passed both the element of the slice, and
-// the index of which of the input slices it was extracted from.
-//
-// The resulting slice will be sorted, but not necessarily stably. In other
-// words, the result is as if by calling Sort(Concat(slices)), but with
-// better time complexity.
-//
-// Time complexity is O(m log n), where m is the total number of elements to
-// merge, and n is the number of slices to merge from.
-func MergeKey[S ~[]E, E any, K cmp.Ordered](s []S, key func(slice int, elem E) K) S {
-	switch len(s) {
-	case 0:
-		return nil
-	case 1:
-		return s[0]
-		// TODO: can implement other common cases here, such as a pair of slices
-		// where the last element of the first is less than the first element of
-		// the second.
-	}
-
-	return MergeKeySeq(slices.Values(s), key, func(_ int, e E) E { return e })
-}
-
-// MergeKeySeq is like [MergeKey], but instead requires callers to provide an
-// iterator that yields slices.
-//
-// Unlike MergeKey, it also permits modifying each element of the output slice
-// before it is appended, with the knowledge of which of the input
-// slices it came from.
 func MergeKeySeq[S ~[]E, E any, K cmp.Ordered, V any](
 	slices iter.Seq[S],
 	key func(slice int, elem E) K,

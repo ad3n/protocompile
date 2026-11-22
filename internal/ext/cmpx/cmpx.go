@@ -33,11 +33,6 @@ const (
 	Greater Result = 1
 )
 
-// Ordered is like [cmp.Ordered], but includes additional types.
-type Ordered interface {
-	~bool | cmp.Ordered
-}
-
 // Ordering is an ordering for the type T, which is any function with the same
 // signature as [Compare].
 type Ordering[T any] func(T, T) Result
@@ -73,11 +68,6 @@ func Map[T any, U any](f func(T) U, cmps ...Ordering[U]) Ordering[T] {
 		}
 		return Equal
 	}
-}
-
-// Reverse returns an ordering which is the reverse of cmp.
-func Reverse[T any](cmp Ordering[T]) Ordering[T] {
-	return func(a, b T) Result { return -cmp(a, b) }
 }
 
 // Bool compares two bools, where false < true.

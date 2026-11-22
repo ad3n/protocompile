@@ -16,13 +16,6 @@ package unicodex
 
 import "github.com/ad3n/protocompile/internal/ext/bitsx"
 
-// ToASCIILower converts an ASCII byte to lowercase.
-func ToASCIILower(b byte) byte {
-	diff := byte('a' - 'A')
-	diff &= byte(bitsx.Mask(b >= 'A') & bitsx.Mask(b <= 'Z'))
-	return b + diff
-}
-
 // ToASCIIUpper converts an ASCII byte to uppercase.
 func ToASCIIUpper(b byte) byte {
 	diff := byte('a' - 'A')

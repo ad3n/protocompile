@@ -15,6 +15,7 @@
 package slicesx_test
 
 import (
+	"slices"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -22,7 +23,7 @@ import (
 	"github.com/ad3n/protocompile/internal/ext/slicesx"
 )
 
-func TestMerge(t *testing.T) {
+func TestMergeKeySeq(t *testing.T) {
 	t.Parallel()
 
 	type V [2]int
@@ -33,7 +34,7 @@ func TestMerge(t *testing.T) {
 	}{
 		{
 			slices: nil,
-			want:   nil,
+			want:   []V{},
 		},
 		{
 			slices: [][]V{{
@@ -63,6 +64,6 @@ func TestMerge(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		assert.Equal(t, test.want, slicesx.MergeKey(test.slices, first))
+		assert.Equal(t, test.want, slicesx.MergeKeySeq(slices.Values(test.slices), first, func(_ int, value V) V { return value }))
 	}
 }

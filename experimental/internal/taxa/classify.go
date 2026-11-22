@@ -24,11 +24,6 @@ import (
 	"github.com/ad3n/protocompile/internal/ext/iterx"
 )
 
-// IsFloat checks whether or not tok is intended to be a floating-point literal.
-func IsFloat(tok token.Token) bool {
-	return tok.AsNumber().IsFloat()
-}
-
 // IsFloatText checks whether or not the given number text is intended to be
 // a floating-point literal.
 func IsFloatText(digits string) bool {

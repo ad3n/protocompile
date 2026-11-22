@@ -107,8 +107,3 @@ func Bit(b bool) int {
 func Mask(b bool) int {
 	return -Bit(b)
 }
-
-// Sign maps false -> -1 and true -> +1.
-func Sign(b bool) int {
-	return Bit(b)*2 - 1
-}

@@ -12,16 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package reflectx
+package memory
 
 import "reflect"
 
-// UnwrapStruct removes as many layers of "one field wrappers" on v as possible.
+// unwrapStruct removes as many layers of "one field wrappers" on v as possible.
 //
 // This means:
 // 1. The one field in a struct with non-zero size.
 // 2. The one element of a [1]T.
-func UnwrapStruct(v reflect.Value) reflect.Value {
+func unwrapStruct(v reflect.Value) reflect.Value {
 loop:
 	switch v.Kind() {
 	case reflect.Struct:

@@ -19,7 +19,7 @@ import (
 )
 
 const (
-	kindNone kind = iota //nolint:unused
+	_ kind = iota
 
 	kindText     // Ordinary text.
 	kindSpace    // All spaces (U+0020).

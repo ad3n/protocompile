@@ -22,8 +22,3 @@ import (
 func Left[K, V any](seq iter.Seq2[K, V]) iter.Seq[K] {
 	return Map2to1(seq, func(k K, _ V) K { return k })
 }
-
-// Right returns a new iterator that drops the left value of a [iter.Seq2].
-func Right[K, V any](seq iter.Seq2[K, V]) iter.Seq[V] {
-	return Map2to1(seq, func(_ K, v V) V { return v })
-}

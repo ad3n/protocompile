@@ -50,11 +50,6 @@ const (
 // plus the number of elements allocated before it.
 type Untyped uint32
 
-// Nil returns a nil arena pointer.
-func Nil() Untyped {
-	return 0
-}
-
 // Nil returns whether this pointer is nil.
 func (p Untyped) Nil() bool {
 	return p == 0

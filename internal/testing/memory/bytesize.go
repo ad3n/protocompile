@@ -12,15 +12,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package bitsx
+package memory
 
 import (
 	"fmt"
 	"math/bits"
+
+	"github.com/ad3n/protocompile/internal/ext/bitsx"
 )
 
 // ByteSize formats a number as a human-readable number of bytes.
-func ByteSize[T Int](v T) string {
+func ByteSize[T bitsx.Int](v T) string {
 	abs := v
 	if v < 0 {
 		abs = -v

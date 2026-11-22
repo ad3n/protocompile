@@ -36,12 +36,7 @@ func NewMapWrapper[K comparable, V any](m map[K]V) MapWrapper[K, V] {
 	return unsafex.Bitcast[MapWrapper[K, V]](m)
 }
 
-// Nil returns whether this wraps the nil map.
-func (m MapWrapper[K, V]) Nil() bool {
-	return m.p == nil
-}
-
 // Get returns the wrapped map.
 func (m MapWrapper[K, V]) Get() map[K]V {
-	return unsafex.Bitcast[map[K]V](m)
+	return unsafex.Bitcast[map[K]V](m.p)
 }

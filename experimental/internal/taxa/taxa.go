@@ -46,11 +46,6 @@ func (n Noun) After() Place {
 	return Place{n, "after"}
 }
 
-// Without is a shorthand for the "without" preposition.
-func (n Noun) Without() Place {
-	return Place{n, "without"}
-}
-
 // On is a shorthand for the "on" preposition.
 func (n Noun) On() Place {
 	return Place{n, "on"}
@@ -59,11 +54,6 @@ func (n Noun) On() Place {
 // AsSet returns a singleton set containing this What.
 func (n Noun) AsSet() Set {
 	return NewSet(n)
-}
-
-// IsKeyword returns whether this is a wrapped [keyword.Keyword] value.
-func (n Noun) IsKeyword() bool {
-	return n > 0 && n < keywordCount
 }
 
 // Place is a location within the grammar that can be referred to within a

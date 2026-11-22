@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package astx
+package parser
 
 import (
 	"fmt"
@@ -28,8 +28,8 @@ import (
 	compilerpb "github.com/ad3n/protocompile/internal/gen/buf/compiler/v1alpha1"
 )
 
-// ToProtoOptions contains options for the [File.ToProto] function.
-type ToProtoOptions struct {
+// toProtoOptions contains options for the [File.ToProto] function.
+type toProtoOptions struct {
 	// If set, no spans will be serialized.
 	//
 	// This operation only destroys non-semantic information.
@@ -52,8 +52,8 @@ type ToProtoOptions struct {
 // Panics if the AST contains a cycle (e.g. a message that contains itself as
 // a nested message). Parsed ASTs will never contain cycles, but users may
 // modify them into a cyclic state.
-func ToProto(f *ast.File, options ToProtoOptions) proto.Message {
-	return (&protoEncoder{ToProtoOptions: options}).file(f) // See codec.go
+func astToProto(f *ast.File, options toProtoOptions) proto.Message {
+	return (&protoEncoder{toProtoOptions: options}).file(f) // See codec.go
 }
 
 // protoEncoder is the state needed for converting an AST node into a Protobuf message.
@@ -61,7 +61,7 @@ type protoEncoder struct {
 	stackMap map[source.Spanner]struct{}
 
 	stack []source.Spanner
-	ToProtoOptions
+	toProtoOptions
 }
 
 // checkCycle panics if v is visited cyclically.

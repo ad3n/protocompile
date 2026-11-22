@@ -16,7 +16,6 @@ package bytesx
 
 import (
 	"slices"
-	"unicode/utf8"
 
 	"github.com/ad3n/protocompile/internal/ext/unsafex"
 )
@@ -35,12 +34,6 @@ func (w *Writer) Write(p []byte) (n int, err error) {
 	return len(p), nil
 }
 
-// Insert inserts the given buffer into the given offset, shifting everything
-// after it over if needed.
-func (w *Writer) Insert(n int, p []byte) {
-	*w = slices.Insert(*w, n, p...)
-}
-
 // WriteString appends the contents of s to the buffer, growing the buffer as
 // needed. The return value n is the length of s; err is always nil.
 func (w *Writer) WriteString(s string) (n int, err error) {
@@ -48,7 +41,6 @@ func (w *Writer) WriteString(s string) (n int, err error) {
 	return len(s), nil
 }
 
-// InsertString is like [Writer.Insert], but takes a string instead.
 func (w *Writer) InsertString(n int, p string) {
 	*w = slices.Insert(*w, n, unsafex.BytesAlias[[]byte](p)...)
 }
@@ -59,19 +51,6 @@ func (w *Writer) InsertString(n int, p string) {
 func (w *Writer) WriteByte(c byte) error {
 	*w = append(*w, c)
 	return nil
-}
-
-// WriteRune appends the UTF-8 encoding of Unicode code point r to the
-// buffer, returning its length and an error, which is always nil but is
-// included to match [bufio.Writer]'s WriteRune.
-func (w *Writer) WriteRune(r rune) (n int, err error) {
-	if r < 0x80 {
-		return 1, w.WriteByte(byte(r))
-	}
-
-	var buf [4]byte
-	n = utf8.EncodeRune(buf[:], r)
-	return w.Write(buf[:n])
 }
 
 // Reset resets the buffer to be empty, but it retains the underlying storage

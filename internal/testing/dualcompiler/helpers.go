@@ -42,28 +42,6 @@ type SkipConfig struct {
 	SkipNew bool
 }
 
-// RunWithBothCompilers runs the given test function with both the old and new compilers.
-// The test function receives a CompilerInterface that can be used to compile proto files.
-// Uses default configuration (testdata ImportPaths with standard imports).
-//
-// The test will run in parallel subtests, one for each compiler.
-//
-// Example usage:
-//
-//	func TestMyFeature(t *testing.T) {
-//	    t.Parallel()
-//	    dualcompiler.RunWithBothCompilers(t, func(t *testing.T, compiler dualcompiler.CompilerInterface) {
-//	        result, err := compiler.Compile(t.Context(), "test.proto")
-//	        require.NoError(t, err)
-//	        // ... test logic
-//	    })
-//	}
-func RunWithBothCompilers(t *testing.T, testFunc func(t *testing.T, compiler CompilerInterface)) {
-	t.Helper()
-	RunWithBothCompilersIf(t, SkipConfig{}, nil, testFunc)
-}
-
-// RunWithBothCompilersIf is like RunWithBothCompilers but allows skipping specific compilers.
 // It also accepts compiler options to customize the compiler configuration.
 //
 // Example usage:
@@ -115,18 +93,6 @@ func RunWithBothCompilersIf(
 	}
 }
 
-// SetupOldCompiler creates a CompilerInterface for the old compiler with standard test configuration.
-// The returned compiler will:
-//   - Use a SourceResolver with ImportPaths set to internal/testdata
-//   - Include standard imports (WKTs).
-func SetupOldCompiler(t *testing.T) CompilerInterface {
-	t.Helper()
-	resolver := protocompile.WithStandardImports(&protocompile.SourceResolver{
-		ImportPaths: []string{defaultTestdataPath},
-	})
-	return NewOldCompiler(WithResolver(resolver))
-}
-
 // SetupOldCompilerWithOptions creates a CompilerInterface for the old compiler with custom configuration.
 // If no resolver is specified in opts, a default resolver with standard imports will be used.
 func SetupOldCompilerWithOptions(t *testing.T, opts []CompilerOption) CompilerInterface {
@@ -143,18 +109,6 @@ func SetupOldCompilerWithOptions(t *testing.T, opts []CompilerOption) CompilerIn
 		opts = append([]CompilerOption{WithResolver(resolver)}, opts...)
 	}
 	return NewOldCompiler(opts...)
-}
-
-// SetupNewCompiler creates a CompilerInterface for the new compiler with standard test configuration.
-// The returned compiler will:
-//   - Use a SourceResolver with ImportPaths set to internal/testdata
-//   - Include WKTs via source.WKTs().
-func SetupNewCompiler(t *testing.T) CompilerInterface {
-	t.Helper()
-	resolver := &protocompile.SourceResolver{
-		ImportPaths: []string{defaultTestdataPath},
-	}
-	return NewNewCompiler(WithResolver(resolver))
 }
 
 // SetupNewCompilerWithOptions creates a CompilerInterface for the new compiler with custom configuration.
@@ -175,35 +129,6 @@ func SetupNewCompilerWithOptions(t *testing.T, opts []CompilerOption) CompilerIn
 	return NewNewCompiler(opts...)
 }
 
-// RunAndCompare runs a test with both compilers and compares their outputs.
-// This is a convenience wrapper that combines RunWithBothCompilers with CompareCompilationResults.
-// Uses default configuration (testdata ImportPaths with standard imports).
-//
-// The compile function should compile the same files with both compilers and return the results.
-// Source code info is stripped by default before comparison.
-//
-// Example usage:
-//
-//	func TestMyFeature(t *testing.T) {
-//	    t.Parallel()
-//	    dualcompiler.RunAndCompare(t, func(t *testing.T, oldCompiler, newCompiler dualcompiler.CompilerInterface) (old, new dualcompiler.CompilationResult) {
-//	        // Compile with both
-//	        oldResult, err := oldCompiler.Compile(t.Context(), "test.proto")
-//	        require.NoError(t, err)
-//	        newResult, err := newCompiler.Compile(t.Context(), "test.proto")
-//	        require.NoError(t, err)
-//	        return oldResult, newResult
-//	    })
-//	}
-func RunAndCompare(
-	t *testing.T,
-	compileFunc func(t *testing.T, oldCompiler, newCompiler CompilerInterface) (oldResult, newResult CompilationResult),
-) {
-	t.Helper()
-	RunAndCompareIf(t, SkipConfig{}, nil, compileFunc)
-}
-
-// RunAndCompareIf is like RunAndCompare but allows skipping specific compilers
 // and customizing the compiler configuration with options.
 func RunAndCompareIf(
 	t *testing.T,

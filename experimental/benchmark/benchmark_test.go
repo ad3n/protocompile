@@ -25,7 +25,6 @@ import (
 	"github.com/ad3n/protocompile/experimental/incremental/queries"
 	"github.com/ad3n/protocompile/experimental/ir"
 	"github.com/ad3n/protocompile/experimental/source"
-	"github.com/ad3n/protocompile/internal/ext/bitsx"
 	"github.com/ad3n/protocompile/internal/testing/googleapis"
 	"github.com/ad3n/protocompile/internal/testing/memory"
 )
@@ -130,9 +129,9 @@ func testMemory(t *testing.T, sources source.Opener, workspace source.Workspace)
 	runtime.GC()
 	m := new(runtime.MemStats)
 	runtime.ReadMemStats(m)
-	t.Logf("heap usage: %v", bitsx.ByteSize(m.Alloc))
+	t.Logf("heap usage: %v", memory.ByteSize(m.Alloc))
 
 	tape := new(memory.MeasuringTape)
 	tape.Measure(results)
-	t.Logf("reachable memory: %v", bitsx.ByteSize(tape.Usage()))
+	t.Logf("reachable memory: %v", memory.ByteSize(tape.Usage()))
 }

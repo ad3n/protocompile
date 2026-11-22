@@ -30,15 +30,6 @@ func Count[T any](seq iter.Seq[T]) int {
 	return total
 }
 
-// Count2 counts the number of elements in seq.
-func Count2[T, U any](seq iter.Seq2[T, U]) int {
-	var total int
-	for range seq {
-		total++
-	}
-	return total
-}
-
 // Join is like [strings.Join], but works on an iterator. Elements are
 // stringified as if by [fmt.Print].
 func Join[T any](seq iter.Seq[T], sep string) string {
@@ -61,14 +52,4 @@ func Every[T any](seq iter.Seq[T], p func(T) bool) bool {
 		}
 	}
 	return true
-}
-
-// Exhaust runs an iterator to completion for its side-effects.
-//
-// This mostly exists because there is a noisy lint that incorrectly thinks all
-// range loops are side-effect free, and because gofmt won't format
-// "for range iter {}" on one line.
-func Exhaust[T any](seq iter.Seq[T]) {
-	for range seq {
-	}
 }

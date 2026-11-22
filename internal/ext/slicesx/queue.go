@@ -91,22 +91,6 @@ func (r *Queue[E]) Reserve(n int) {
 	r.resize(int(bitsx.MakePowerOfTwo(uint(newCap + 1))))
 }
 
-// Front returns a pointer to the element at the front of the queue.
-func (r *Queue[E]) Front() *E {
-	if r.start == r.end {
-		return nil
-	}
-	return &r.buf[r.start]
-}
-
-// Back returns a pointer to the element at the back of the queue.
-func (r *Queue[E]) Back() *E {
-	if r.start == r.end {
-		return nil
-	}
-	return &r.buf[(r.end-1)&(len(r.buf)-1)]
-}
-
 // PushFront pushes elements to the front of the queue.
 func (r *Queue[E]) PushFront(v ...E) {
 	r.Reserve(len(v))
@@ -149,17 +133,6 @@ func (r *Queue[E]) PopFront() (E, bool) {
 	r.start++
 	r.start &= len(r.buf) - 1
 	return v, true
-}
-
-// PopBack pops the element at the back of the queue.
-func (r *Queue[E]) PopBack() (E, bool) {
-	if r.start == r.end {
-		var z E
-		return z, false
-	}
-	r.end--
-	r.end &= len(r.buf) - 1
-	return Take(r.buf, r.end)
 }
 
 // Values returns an iterator over the elements of the queue.
@@ -232,13 +205,6 @@ func (r Queue[E]) Format(out fmt.State, verb rune) {
 	} else {
 		fmt.Fprint(out, "]")
 	}
-}
-
-// Clear clears the queue.
-func (r *Queue[_]) Clear() {
-	clear(r.buf)
-	r.start, r.end = 0, 0
-	r.buf = r.buf[:0]
 }
 
 func (r *Queue[E]) resize(n int) {

@@ -265,26 +265,11 @@ again:
 	return id
 }
 
-// InternBytes interns the given byte string into this table.
-//
-// This function may be called by multiple goroutines concurrently, but bytes
-// must not be modified until this function returns.
-func (t *Table) InternBytes(bytes []byte) ID {
-	// Intern() will not modify its argument, since it believes that it is a
-	// string. It will also clone the string if it needs to write it to the
-	// intern table, so it does not hold onto its argument after it returns.
-	//
-	// Thus, we can simply turn bytes into a string temporarily to pass to
-	// Intern.
-	return t.Intern(unsafex.StringAlias(bytes))
-}
-
 // QueryBytes will query whether bytes has already been interned.
 //
 // This function may be called by multiple goroutines concurrently, but bytes
 // must not be modified until this function returns.
 func (t *Table) QueryBytes(bytes []byte) (ID, bool) {
-	// See InternBytes's comment.
 	return t.Query(unsafex.StringAlias(bytes))
 }
 

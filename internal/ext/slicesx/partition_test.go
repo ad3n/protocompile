@@ -23,7 +23,7 @@ import (
 	"github.com/ad3n/protocompile/internal/ext/slicesx"
 )
 
-func TestPartition(t *testing.T) {
+func TestPartitionKey(t *testing.T) {
 	t.Parallel()
 	assert := assert.New(t)
 
@@ -75,7 +75,7 @@ func TestPartition(t *testing.T) {
 				ss    [][]int
 				count int
 			)
-			it := slicesx.Partition(test.slice)
+			it := slicesx.PartitionKey(test.slice, func(value int) int { return value })
 			it(func(i int, s []int) bool {
 				if test.breakAt == count {
 					return false

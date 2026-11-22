@@ -19,7 +19,6 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/ad3n/protocompile/internal/ext/mapsx"
 	"github.com/ad3n/protocompile/internal/intern"
 )
 
@@ -27,12 +26,10 @@ func TestSyntheticNames(t *testing.T) {
 	t.Parallel()
 
 	table := new(intern.Table)
-	names := syntheticNames(mapsx.Set(
-		table.Intern("foo"),
-		table.Intern("bar"),
-		table.Intern("baz"),
-		table.Intern("X_baz"),
-	))
+	names := make(syntheticNames)
+	for _, name := range []string{"foo", "bar", "baz", "X_baz"} {
+		names[table.Intern(name)] = struct{}{}
+	}
 
 	assert.Equal(t, "_foo", names.generateIn("_foo", table))
 	assert.Equal(t, "X_foo", names.generateIn("_foo", table))
